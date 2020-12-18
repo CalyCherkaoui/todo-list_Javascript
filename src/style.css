@@ -5,3 +5,12 @@
 .shown {
   display: block;
 }
+
+.add_proj_icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.hide {
+  display: none;
+}

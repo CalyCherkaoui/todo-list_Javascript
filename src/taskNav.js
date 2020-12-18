@@ -8,7 +8,7 @@ const taskNav = (myproject) => {
   brand.setAttribute('class', 'project_title');
   brand.textContent = myproject.title + 'the id' + myproject.id;
 
-
+  
   const tasksWrapper = document.createElement('div');
   tasksWrapper.setAttribute('class', 'tasks_wrapper');
 
