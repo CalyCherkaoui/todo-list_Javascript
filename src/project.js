@@ -1,10 +1,15 @@
 class Project {
-  constructor(title){
+  constructor(title, id){
     this._title = title;
     this._tasks = [];
+    this._id = id;
   }
   get title(){
     return this._title;
+  }
+
+  get id(){
+    return this._id;
   }
 
   set title(title){

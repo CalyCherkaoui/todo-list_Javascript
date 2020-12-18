@@ -8,8 +8,8 @@ const globalContainer = document.querySelector('#container');
 
 // apped globalContainer with projectnav & taskNav
 
-let prj1 = new Project('Project1');
-let prj2 = new Project('tle2');
+let prj1 = new Project('Project1', 1);
+let prj2 = new Project('tle2', 2);
 
 
 const prjList = [prj1, prj2];
