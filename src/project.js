@@ -24,5 +24,6 @@ class Project {
     // find index of task by id
     this._tasks.splice(id,1);//id ===> transformer en index
   }
-
 }
+
+module.exports = Project;

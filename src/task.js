@@ -47,3 +47,5 @@ class Task{
     this._status = status;
   }
 }
+
+module.exports = Task;
