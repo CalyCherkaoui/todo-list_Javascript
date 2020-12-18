@@ -1,9 +1,21 @@
 import './style.css';
-const Project = require('./project');
-const Task = require('./task');
+import projectNav from './projectNav';
+const Project = require('./project').default;
+const Task = require('./task').default;
 
-let project = new Project("qlqchose");
-console.log(project.title);
+const globalContainer = document.querySelector('#container');
 
-let task = new Task("couscous", "deliscious", "now", 1111);
-console.log(`title === ${task.title} description === ${task.description} ans status === ${task.status}`);
+// apped globalContainer with projectnav & taskNav
+
+let prj1 = new Project('tle');
+let prj2 = new Project('tle2');
+
+
+const prjList = [prj1, prj2];
+
+// console.log(prj1);
+// console.log(prjList);
+
+// console.log(typeof projectNav);
+// console.log(projectNav(prjList));
+globalContainer.append(projectNav(prjList));
