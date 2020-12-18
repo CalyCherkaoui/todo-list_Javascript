@@ -1,0 +1,7 @@
+.tabcontent {
+  display: none;
+}
+
+.shown {
+  display: block;
+}

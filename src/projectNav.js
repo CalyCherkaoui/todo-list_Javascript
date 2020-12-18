@@ -1,3 +1,4 @@
+import { openTab } from "./listners";
 const projectNav = (projList) => {
 
   const divNavWrap = document.createElement('div');
@@ -13,6 +14,10 @@ const projectNav = (projList) => {
 
   projList.forEach( element => {
     const btn = document.createElement('button');
+    // dataset
+    btn.dataset.projectId = element.id;
+    btn.addEventListener('click',(e)=> openTab(e));
+
     btn.setAttribute('class', 'tablinks');
     btn.textContent = element.title;
     tabsDiv.append(btn);
