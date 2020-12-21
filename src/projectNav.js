@@ -1,5 +1,6 @@
-import { addProject, openTab, cancelAddProject } from "./listners";
+import { addProject, openTab, cancelAddProject , deleteProject} from "./listners";
 import addProjIcon from "./playlist.png";
+import deleteProjectIcon  from "./cancel.png";
 
 const projectNav = (projList) => {
 
@@ -57,15 +58,24 @@ const projectNav = (projList) => {
 }
 
 const displayProject = (project) =>{
+  const wraper = document.createElement('div');
+  wraper.setAttribute('id' , `project_container_${project.id}`);
+  wraper.classList.add('project_container');
   const btn = document.createElement('button');
   // dataset
   btn.dataset.projectId = project.id;
   btn.addEventListener('click',(e)=> openTab(e));
-
   btn.setAttribute('class', 'tablinks');
   btn.textContent = project.title;
+  
+  const deleteProjectImage = new Image();
+  deleteProjectImage.setAttribute('src', deleteProjectIcon);
+  deleteProjectImage.setAttribute('class', 'add_proj_icon');
+  deleteProjectImage.dataset.projectId = project.id;
+  deleteProjectImage.addEventListener('click', e=>deleteProject(e));
 
-  return btn;
+  wraper.append(btn , deleteProjectImage);
+  return wraper;
 }
 
 export {projectNav , displayProject};

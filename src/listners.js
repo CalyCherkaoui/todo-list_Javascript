@@ -1,4 +1,4 @@
-import { projectsList, countProjects} from './variables';
+import { projectsList, countProjects , deleteFromProjectList} from './variables';
 import { displayProject } from "./projectNav";
 const Project = require('./project').default;
 const Task = require('./task').default;
@@ -35,4 +35,14 @@ const cancelAddProject = () => {
   form.classList.toggle('hide');
 }
 
-export {openTab, addProject, cancelAddProject}
+const deleteProject = (e)=>{
+  let id = e.target.dataset.projectId;
+  let wrapper =  document.querySelector(`#project_container_${id}`);
+  let tabs = document.querySelector('#tabs');
+  tabs.removeChild(wrapper);
+  // remove from project list
+  deleteFromProjectList(projectsList,id);
+  console.log(`after delete ${projectsList}`);
+}
+
+export {openTab, addProject, cancelAddProject, deleteProject }
