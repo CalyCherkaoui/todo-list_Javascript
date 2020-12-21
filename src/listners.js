@@ -1,4 +1,5 @@
 import { projectsList, countProjects} from './variables';
+import { displayProject } from "./projectNav";
 const Project = require('./project').default;
 const Task = require('./task').default;
 
@@ -20,6 +21,8 @@ const addProject = () => {
   const project = new Project(title, countProjects);
   projectsList.push(project);
   console.log(projectsList);
+  let tabs = document.querySelector('#tabs');
+  tabs.append( displayProject(project) );
 
   let form = document.querySelector('#add_project_form');
   form.classList.toggle('hide');

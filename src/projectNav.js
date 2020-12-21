@@ -44,24 +44,28 @@ const projectNav = (projList) => {
   addProjectFormButtons.append(addProjectFormCreate,addProjectFormCancel);
   addProjForm.append(addProjTitleInput, addProjectFormButtons);
 
-
   const tabsDiv = document.createElement('div');
-  tabsDiv.setAttribute('class', 'tabs');
-
-  projList.forEach( element => {
-    const btn = document.createElement('button');
-    // dataset
-    btn.dataset.projectId = element.id;
-    btn.addEventListener('click',(e)=> openTab(e));
-
-    btn.setAttribute('class', 'tablinks');
-    btn.textContent = element.title;
-    tabsDiv.append(btn);
+  tabsDiv.setAttribute('id', 'tabs');
+  
+  projList.forEach(element => {
+    tabsDiv.append(displayProject(element));
     return tabsDiv;
   });
 
-  divNavWrap.append(brand, addProj, addProjForm, tabsDiv);
+  divNavWrap.append(brand, addProj, addProjForm , tabsDiv);
   return divNavWrap;
 }
 
-export default projectNav;
+const displayProject = (project) =>{
+  const btn = document.createElement('button');
+  // dataset
+  btn.dataset.projectId = project.id;
+  btn.addEventListener('click',(e)=> openTab(e));
+
+  btn.setAttribute('class', 'tablinks');
+  btn.textContent = project.title;
+
+  return btn;
+}
+
+export {projectNav , displayProject};

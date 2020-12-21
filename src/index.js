@@ -1,6 +1,6 @@
 import './style.css';
 import { projectsList, countProjects} from './variables';
-import projectNav from './projectNav';
+import {projectNav , displayProject} from './projectNav';
 import taskNav from './taskNav';
 const Project = require('./project').default;
 const Task = require('./task').default;
