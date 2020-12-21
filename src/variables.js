@@ -27,4 +27,9 @@ const deleteFromProjectList = (projectsList , id)=>{
   projectsList.splice(target , 1);
 }
 
-export {projectsList, countProjects , deleteFromProjectList};
+const editProjectTitle = (projectsList , id, value)=>{
+  let target = findProject(projectsList, id);
+  projectsList[target].title = value;
+}
+
+export {projectsList, countProjects , deleteFromProjectList, editProjectTitle};

@@ -1,4 +1,4 @@
-import { projectsList, countProjects , deleteFromProjectList} from './variables';
+import { projectsList, countProjects , deleteFromProjectList, editProjectTitle} from './variables';
 import { displayProject } from "./projectNav";
 const Project = require('./project').default;
 const Task = require('./task').default;
@@ -45,4 +45,35 @@ const deleteProject = (e)=>{
   console.log(`after delete ${projectsList}`);
 }
 
-export {openTab, addProject, cancelAddProject, deleteProject }
+const editProject = (e) => {
+  let id = e.target.dataset.projectId;
+  const spanShow = document.querySelector(`#project_show_mode_${id}`);
+  spanShow.classList.toggle('hide');
+  const spanEdit = document.querySelector(`#project_edit_mode_${id}`);
+  spanEdit.classList.toggle('hide');
+}
+
+const cancelProject = (e) => {
+  let id = e.target.dataset.projectId;
+  const spanShow = document.querySelector(`#project_show_mode_${id}`);
+  spanShow.classList.toggle('hide');
+  const spanEdit = document.querySelector(`#project_edit_mode_${id}`);
+  spanEdit.classList.toggle('hide');
+  const input = document.querySelector(`#edit_project_title_${id}`);
+  const btnTxt = document.querySelector(`#show_project_title_${id}`);
+  input.value = btnTxt.textContent;
+}
+
+const submitEditProject = (e) => {
+  let id = e.target.dataset.projectId;
+  const input = document.querySelector(`#edit_project_title_${id}`);
+  editProjectTitle(projectsList, id, input.value);
+  const btnTxt = document.querySelector(`#show_project_title_${id}`);
+  btnTxt.textContent = input.value;
+  const spanShow = document.querySelector(`#project_show_mode_${id}`);
+  spanShow.classList.toggle('hide');
+  const spanEdit = document.querySelector(`#project_edit_mode_${id}`);
+  spanEdit.classList.toggle('hide');
+}
+
+export {openTab, addProject, cancelAddProject, deleteProject, editProject, cancelProject, submitEditProject}
