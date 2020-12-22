@@ -1,5 +1,5 @@
 import addTaskIcon from "./add.png";
-import { cancelAddTask , addTask, deleteTask} from "./listners";
+import { cancelAddTask , addTask, deleteTask, editTask} from "./listners";
 import editTaskIcon from "./pencil.png";
 import deleteTaskIcon  from "./cancel.png";
 
@@ -8,6 +8,7 @@ const displayTask = (task)=>{
   taskCard.setAttribute('class', 'task_card');
   taskCard.setAttribute('id', `task_card_${task.projId}_${task.id}`);
 
+  // displaying the task mode
   const divShowMode = document.createElement('div');
   divShowMode.setAttribute('id', `task_show_mode_${task.projId}_${task.id}`);
   divShowMode.classList.add('show_div_task');
@@ -47,9 +48,15 @@ const displayTask = (task)=>{
 
   divShowModeRight.append(spanDueDate, spanStatus, editTaskImage, deleteTaskImage);
 
+  // editing the task mode
+
+  const divEditMode = document.createElement('div');
+  divEditMode.setAttribute('id', `task_edit_mode_${task.projId}_${task.id}`);
+  divEditMode.classList.add('edit_div_task', 'hide');
+  divEditMode.textContent = 'editor';
 
   divShowMode.append(divShowModeLeft, divShowModeRight);
-  taskCard.append(divShowMode);
+  taskCard.append(divShowMode, divEditMode);
 
   return taskCard;
 }

@@ -129,8 +129,15 @@ const deleteTask = (e)=>{
 }
 
 const editTask = (e) => {
-  
+  let taskId = e.target.dataset.TaskId;
+  let projId = e.target.dataset.TaskProjId;
+
+  const divShowMode = document.querySelector(`#task_show_mode_${projId}_${taskId}`);
+  divShowMode.classList.toggle('hide');
+
+  const divEditMode = document.querySelector(`#task_edit_mode_${projId}_${taskId}`);
+  divEditMode.classList.toggle('hide');
 }
 
 
-export {openTab, addProject, cancelAddProject, deleteProject, editProject, cancelProject, submitEditProject , cancelAddTask , addTask, deleteTask}
+export {openTab, addProject, cancelAddProject, deleteProject, editProject, cancelProject, submitEditProject , cancelAddTask , addTask, deleteTask, editTask}
