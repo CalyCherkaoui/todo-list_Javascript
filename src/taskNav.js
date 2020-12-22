@@ -1,5 +1,5 @@
 import addTaskIcon from "./add.png";
-import { cancelAddTask , addTask, deleteTask, editTask} from "./listners";
+import { cancelAddTask , addTask, deleteTask, editTask , cancelEditTask} from "./listners";
 import editTaskIcon from "./pencil.png";
 import deleteTaskIcon  from "./cancel.png";
 
@@ -53,7 +53,71 @@ const displayTask = (task)=>{
   const divEditMode = document.createElement('div');
   divEditMode.setAttribute('id', `task_edit_mode_${task.projId}_${task.id}`);
   divEditMode.classList.add('edit_div_task', 'hide');
-  divEditMode.textContent = 'editor';
+  // Edit Form
+  const editTaskFormWrapper = document.createElement('div');
+  editTaskFormWrapper.classList.add('edit_task_form_wrapper');
+  const editTaskTitleInput = document.createElement('input');
+  editTaskTitleInput.setAttribute('type', 'text');
+  editTaskTitleInput.setAttribute('id', `edit_task_title_${task.projId}_${task.id}`);
+  editTaskTitleInput.setAttribute('value', task.title);
+
+  const editTaskDescriptionInput = document.createElement('input');
+  editTaskDescriptionInput.setAttribute('type', 'text');
+  editTaskDescriptionInput.setAttribute('id', `edit_task_description_${task.projId}_${task.id}`);
+  editTaskDescriptionInput.setAttribute('value', task.description);
+
+  const editPrioritySpan = document.createElement('span');
+  editPrioritySpan.setAttribute('class', 'edit_task_select_span');
+  const editPriorityLabel = document.createElement('label');
+  editPriorityLabel.textContent = 'Priority:'
+  editPriorityLabel.setAttribute('for', `edit_task_priority_${task.projId}_${task.id}`);
+  const editPrioritySelect = document.createElement('select');
+  editPrioritySelect.setAttribute('id', `edit_task_priority_${task.projId}_${task.id}`);
+  const editPriorityOption1 = document.createElement('option');
+  editPriorityOption1.setAttribute('value', 'hight');
+  editPriorityOption1.textContent = 'Hight';
+  const editPriorityOption2 = document.createElement('option');
+  editPriorityOption2.setAttribute('value', 'medium');
+  editPriorityOption2.textContent = 'Medium';
+  const editPriorityOption3 = document.createElement('option');
+  editPriorityOption3.setAttribute('value', 'low');
+  editPriorityOption3.textContent = 'Low';
+  
+  editPrioritySelect.append(editPriorityOption1, editPriorityOption2, editPriorityOption3);
+  editPrioritySelect.value = task.priority;
+  editPrioritySpan.append(editPriorityLabel, editPrioritySelect);
+
+  const editDateSpan = document.createElement('span');
+  editPrioritySpan.setAttribute('class', 'edit_task_date_span');
+  const editDateLabel = document.createElement('label');
+  editDateLabel.textContent = 'Schedule:'
+  editDateLabel.setAttribute('for', `edit_task_date_${task.projId}_${task.id}`);
+  const editDateInput = document.createElement('input');
+  editDateInput.setAttribute('type', 'date');
+  editDateInput.setAttribute('id', `edit_task_date_${task.projId}_${task.id}`);
+  editDateSpan.append(editDateLabel, editDateInput);
+
+  const editTaskFormButtons = document.createElement('div');
+  editTaskFormButtons.setAttribute('class', 'edit_task_form_buttons');
+  const editTaskFormCreate = document.createElement('button');
+  // editTaskFormCreate.dataset.projectId = myproject.id;
+  // editTaskFormCreate.editEventListener('click', (e) => submitEditTask(e));
+  editTaskFormCreate.textContent = 'Submit';
+
+  const editTaskFormCancel = document.createElement('button');
+  editTaskFormCancel.textContent = 'Cancel';
+  editTaskFormCancel.dataset.TaskId = task.id;
+  editTaskFormCancel.dataset.TaskProjId = task.projId;
+
+
+  // editTaskFormCancel.addEventListener('click',  e => cancelEditTask(e));
+
+  editTaskFormButtons.append(editTaskFormCreate , editTaskFormCancel);
+
+  editTaskFormWrapper.append(editTaskTitleInput, editTaskDescriptionInput, editPrioritySpan, editDateSpan, editTaskFormButtons);
+
+  //============================================
+  divEditMode.append(editTaskFormWrapper);
 
   divShowMode.append(divShowModeLeft, divShowModeRight);
   taskCard.append(divShowMode, divEditMode);
