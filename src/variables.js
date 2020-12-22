@@ -1,5 +1,8 @@
 import { id } from "date-fns/locale";
 
+const tasksContainer = document.createElement('div');
+tasksContainer.setAttribute('id', 'tasks_container');
+
 const projectsList = [];
 let countProjects = 0;
 
@@ -32,4 +35,6 @@ const editProjectTitle = (projectsList , id, value)=>{
   projectsList[target].title = value;
 }
 
-export {projectsList, countProjects , deleteFromProjectList, editProjectTitle};
+
+
+export {projectsList, countProjects , deleteFromProjectList, editProjectTitle , tasksContainer};
