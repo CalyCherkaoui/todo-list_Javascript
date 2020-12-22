@@ -41,4 +41,4 @@ const addTaskToProject = (array, id, task)=>{
   project.addTask(task);
 }
 
-export {projectsList, countProjects , deleteFromProjectList, editProjectTitle , tasksContainer, addTaskToProject};
+export {projectsList, countProjects , deleteFromProjectList, editProjectTitle , tasksContainer, addTaskToProject, findProject};

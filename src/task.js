@@ -1,10 +1,12 @@
 class Task{
-  constructor(title, description, dueDate, priority){
+  constructor(title, description, dueDate = 911, priority, projId, id){
     this._title = title;
     this._description = description;
     this._dueDate = dueDate;
     this._priority = priority; // hight medium low
     this._status = "todo";// "todo"  ====> "progress" ===> "done"
+    this._projId = projId;
+    this._id = id;
   }
 
   get title(){
@@ -17,6 +19,16 @@ class Task{
 
   get description(){
     return this._description;
+  }
+
+  
+  get projId(){
+    return this._projId;
+  }
+
+  
+  get id(){
+    return this._id;
   }
 
   set description(description){
