@@ -11,9 +11,10 @@ const globalContainer = document.querySelector('#container');
 // apped globalContainer with projectnav & taskNav
 
 let prj1 = new Project('Project1', 1);
+
 let prj2 = new Project('Project2', 2);
 
-
+countProjects += 2;
 // const prjList = [prj1, prj2];
 
 let task1 = new Task('my task', 'dddddd', '12', 'low');
