@@ -1,4 +1,5 @@
 import addTaskIcon from "./add.png";
+import { cancelAddTask , addTask } from "./listners";
 
 const displayTask = (task)=>{
   const taskCard = document.createElement('div');
@@ -28,6 +29,9 @@ const taskNav = (myproject) => {
   // add task header
   
   const headerAddTask = document.createElement('button');
+  headerAddTask.dataset.projectId = myproject.id;
+  headerAddTask.addEventListener('click', e => cancelAddTask(e));
+
   headerAddTask.setAttribute('class', 'header_add_task');
   const addTaskImage = new Image();
   addTaskImage.setAttribute('src', addTaskIcon);
@@ -74,6 +78,7 @@ const taskNav = (myproject) => {
   const addPriorityOption3 = document.createElement('option');
   addPriorityOption3.setAttribute('value', 'low');
   addPriorityOption3.textContent = 'Low';
+
   addPrioritySelect.append(addPriorityOption1, addPriorityOption2, addPriorityOption3);
   addPrioritySpan.append(addPriorityLabel, addPrioritySelect);
 
@@ -87,11 +92,25 @@ const taskNav = (myproject) => {
   addDateInput.setAttribute('id', `task_date_${myproject.id}`);
   addDateSpan.append(addDateLabel, addDateInput);
 
+  const addTaskFormButtons = document.createElement('div');
+  addTaskFormButtons.setAttribute('class', 'add_task_form_buttons');
+  const addTaskFormCreate = document.createElement('button');
+  addTaskFormCreate.dataset.projectId = myproject.id;
+  addTaskFormCreate.addEventListener('click', (e) => addTask(e));
+  addTaskFormCreate.textContent = 'Create Task';
 
-  addTaskFormWrapper.append(addTaskTitleInput, addTaskDescriptionInput, addPrioritySpan, addDateSpan);
+  const addTaskFormCancel = document.createElement('button');
+  addTaskFormCancel.textContent = 'Cancel';
+  addTaskFormCancel.dataset.projectId = myproject.id;
+  addTaskFormCancel.addEventListener('click',  e => cancelAddTask(e));
+
+  addTaskFormButtons.append(addTaskFormCreate , addTaskFormCancel);
+
+  addTaskFormWrapper.append(addTaskTitleInput, addTaskDescriptionInput, addPrioritySpan, addDateSpan, addTaskFormButtons);
   // tasks wrapper
   
   const tasksWrapper = document.createElement('div');
+  tasksWrapper.setAttribute('id', `tasks_wrapper_${myproject.id}`);
   tasksWrapper.setAttribute('class', 'tasks_wrapper');
 
   myproject.tasks.forEach( element => {
@@ -104,4 +123,4 @@ const taskNav = (myproject) => {
 }
 
 
-export {taskNav};
+export {taskNav , displayTask};

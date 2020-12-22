@@ -1,5 +1,6 @@
-import { projectsList, countProjects , deleteFromProjectList, editProjectTitle} from './variables';
+import { projectsList, countProjects , deleteFromProjectList, editProjectTitle , addTaskToProject} from './variables';
 import { displayProject } from "./projectNav";
+import { displayTask } from "./taskNav";
 const Project = require('./project').default;
 const Task = require('./task').default;
 
@@ -76,4 +77,35 @@ const submitEditProject = (e) => {
   spanEdit.classList.toggle('hide');
 }
 
-export {openTab, addProject, cancelAddProject, deleteProject, editProject, cancelProject, submitEditProject}
+const cancelAddTask = (e) => {
+  let id = e.target.dataset.projectId;
+  let titleInput = document.querySelector(`#task_title_${id}`);
+  titleInput.value = '';
+  let descriptionInput = document.querySelector(`#task_description_${id}`);
+  descriptionInput.value = '';
+  let priorityInput = document.querySelector(`#task_priority_${id}`);
+  priorityInput.value = 'low';
+
+  let form = document.querySelector(`#add_task_form_${id}`);
+  form.classList.toggle('hide');
+}
+
+const addTask = (e) => {
+  let id = e.target.dataset.projectId;
+  let titleInput = document.querySelector(`#task_title_${id}`);
+  let title = titleInput.value;
+  let descriptionInput = document.querySelector(`#task_description_${id}`);
+  let description =  descriptionInput.value;
+  let priorityInput = document.querySelector(`#task_priority_${id}`);
+  let priority = priorityInput.value;
+  const task = new Task(title , description, 911, priority);
+  addTaskToProject(projectsList,id,task);
+  console.log(projectsList);
+  let taskWrapper = document.querySelector(`#tasks_wrapper_${id}`);
+  taskWrapper.append( displayTask(task) );
+
+  let form = document.querySelector(`#add_task_form_${id}`);
+  form.classList.toggle('hide');
+}
+
+export {openTab, addProject, cancelAddProject, deleteProject, editProject, cancelProject, submitEditProject , cancelAddTask , addTask}

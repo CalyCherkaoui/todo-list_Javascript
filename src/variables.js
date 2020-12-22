@@ -1,4 +1,4 @@
-import { id } from "date-fns/locale";
+// import { id } from "date-fns/locale";
 
 const tasksContainer = document.createElement('div');
 tasksContainer.setAttribute('id', 'tasks_container');
@@ -35,6 +35,10 @@ const editProjectTitle = (projectsList , id, value)=>{
   projectsList[target].title = value;
 }
 
+const addTaskToProject = (array, id, task)=>{
+  let target = findProject(array, id);
+  let project = array[target];
+  project.addTask(task);
+}
 
-
-export {projectsList, countProjects , deleteFromProjectList, editProjectTitle , tasksContainer};
+export {projectsList, countProjects , deleteFromProjectList, editProjectTitle , tasksContainer, addTaskToProject};
