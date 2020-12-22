@@ -1,4 +1,4 @@
-import { projectsList, countProjects , deleteFromProjectList, editProjectTitle , addTaskToProject} from './variables';
+import { projectsList, countProjects , deleteFromProjectList, editProjectTitle , addTaskToProject, findProject} from './variables';
 import { displayProject } from "./projectNav";
 import { displayTask } from "./taskNav";
 const Project = require('./project').default;
@@ -92,15 +92,18 @@ const cancelAddTask = (e) => {
 
 const addTask = (e) => {
   let id = e.target.dataset.projectId;
+  let projectIndx = findProject(projectsList, id);
+  let project = projectsList[projectIndx];
+
   let titleInput = document.querySelector(`#task_title_${id}`);
   let title = titleInput.value;
   let descriptionInput = document.querySelector(`#task_description_${id}`);
   let description =  descriptionInput.value;
   let priorityInput = document.querySelector(`#task_priority_${id}`);
   let priority = priorityInput.value;
-  const task = new Task(title , description, 911, priority);
-  addTaskToProject(projectsList,id,task);
-  console.log(projectsList);
+  const task = new Task(title , description, 911, priority, id, project.taskCounter);
+  addTaskToProject(projectsList, id, task);
+  // console.log(projectsList);
   let taskWrapper = document.querySelector(`#tasks_wrapper_${id}`);
   taskWrapper.append( displayTask(task) );
 
@@ -108,4 +111,26 @@ const addTask = (e) => {
   form.classList.toggle('hide');
 }
 
-export {openTab, addProject, cancelAddProject, deleteProject, editProject, cancelProject, submitEditProject , cancelAddTask , addTask}
+const deleteTask = (e)=>{
+  let taskId = e.target.dataset.TaskId;
+  let projId = e.target.dataset.TaskProjId;
+
+  let TaskCard = document.querySelector(`#task_card_${projId}_${taskId}`);
+  let tasksWrapper = document.querySelector(`#tasks_wrapper_${projId}`);
+  tasksWrapper.removeChild(TaskCard);
+
+
+  // remove from project list
+  let projectIndx = findProject(projectsList, projId);
+  let project = projectsList[projectIndx];
+  project.removeTask(taskId);
+
+  console.log(`after delete ${project.tasks}`);
+}
+
+const editTask = (e) => {
+  
+}
+
+
+export {openTab, addProject, cancelAddProject, deleteProject, editProject, cancelProject, submitEditProject , cancelAddTask , addTask, deleteTask}

@@ -1,10 +1,56 @@
 import addTaskIcon from "./add.png";
-import { cancelAddTask , addTask } from "./listners";
+import { cancelAddTask , addTask, deleteTask} from "./listners";
+import editTaskIcon from "./pencil.png";
+import deleteTaskIcon  from "./cancel.png";
 
 const displayTask = (task)=>{
   const taskCard = document.createElement('div');
   taskCard.setAttribute('class', 'task_card');
-  taskCard.textContent = task.title;
+  taskCard.setAttribute('id', `task_card_${task.projId}_${task.id}`);
+
+  const divShowMode = document.createElement('div');
+  divShowMode.setAttribute('id', `task_show_mode_${task.projId}_${task.id}`);
+  divShowMode.classList.add('show_div_task');
+
+  const divShowModeLeft = document.createElement('div');
+  divShowModeLeft.setAttribute('class', 'div_show_mode_left');
+  const priorityBox = document.createElement('div');
+  priorityBox.classList.add(`priority_box_${task.priority}`, "priority_box");
+  const taskTitle = document.createElement('h3');
+  taskTitle.textContent = task.title;
+  divShowModeLeft.append(priorityBox, taskTitle);
+
+  const divShowModeRight = document.createElement('div');
+  divShowModeRight.setAttribute('class', 'div_show_mode_right');
+
+  const spanDueDate = document.createElement('span');
+  spanDueDate.textContent = task.dueDate;
+
+  const spanStatus = document.createElement('span');
+  spanStatus.setAttribute('id', `task_status_${task.status}`);
+  spanStatus.classList.add('task_status');
+  spanStatus.textContent = task.status;
+
+  const editTaskImage = new Image();
+  editTaskImage.setAttribute('src', editTaskIcon);
+  editTaskImage.setAttribute('class', 'add_proj_icon');
+  editTaskImage.dataset.TaskId = task.id;
+  editTaskImage.dataset.TaskProjId = task.projId;
+  editTaskImage.addEventListener('click', e => editTask(e));
+
+  const deleteTaskImage = new Image();
+  deleteTaskImage.setAttribute('src', deleteTaskIcon);
+  deleteTaskImage.setAttribute('class', 'add_proj_icon');
+  deleteTaskImage.dataset.TaskId = task.id;
+  deleteTaskImage.dataset.TaskProjId = task.projId;
+  deleteTaskImage.addEventListener('click', e => deleteTask(e));
+
+  divShowModeRight.append(spanDueDate, spanStatus, editTaskImage, deleteTaskImage);
+
+
+  divShowMode.append(divShowModeLeft, divShowModeRight);
+  taskCard.append(divShowMode);
+
   return taskCard;
 }
 

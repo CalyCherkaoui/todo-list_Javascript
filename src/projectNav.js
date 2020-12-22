@@ -68,7 +68,6 @@ const displayProject = (project) =>{
 
   tasksContainer.append(taskNav(project));
 
-  
   return wraper;
 }
 

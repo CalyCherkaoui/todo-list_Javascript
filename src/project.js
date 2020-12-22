@@ -3,6 +3,7 @@ class Project {
     this._title = title;
     this._tasks = [];
     this._id = id;
+    this._taskCounter = 0;
   }
   get title(){
     return this._title;
@@ -10,6 +11,10 @@ class Project {
 
   get id(){
     return this._id;
+  }
+
+  get taskCounter(){
+    return this._taskCounter;
   }
 
   set title(title){
@@ -23,6 +28,7 @@ class Project {
   addTask(task){
     // sort tasks later
     this._tasks.push(task);
+    this._taskCounter += 1;
   }
 
   removeTask(id){
