@@ -1,5 +1,5 @@
 import addTaskIcon from "./add.png";
-import { cancelAddTask , addTask, deleteTask, editTask , cancelEditTask} from "./listners";
+import { cancelAddTask , addTask, deleteTask, cancelEditTask , submitEditTask} from "./listners";
 import editTaskIcon from "./pencil.png";
 import deleteTaskIcon  from "./cancel.png";
 
@@ -37,7 +37,7 @@ const displayTask = (task)=>{
   editTaskImage.setAttribute('class', 'add_proj_icon');
   editTaskImage.dataset.TaskId = task.id;
   editTaskImage.dataset.TaskProjId = task.projId;
-  editTaskImage.addEventListener('click', e => editTask(e));
+  editTaskImage.addEventListener('click', e => cancelEditTask(e));
 
   const deleteTaskImage = new Image();
   deleteTaskImage.setAttribute('src', deleteTaskIcon);
@@ -99,10 +99,11 @@ const displayTask = (task)=>{
 
   const editTaskFormButtons = document.createElement('div');
   editTaskFormButtons.setAttribute('class', 'edit_task_form_buttons');
-  const editTaskFormCreate = document.createElement('button');
-  // editTaskFormCreate.dataset.projectId = myproject.id;
-  // editTaskFormCreate.editEventListener('click', (e) => submitEditTask(e));
-  editTaskFormCreate.textContent = 'Submit';
+  const editTaskFormSubmit = document.createElement('button');
+  editTaskFormSubmit.dataset.TaskId = task.id;
+  editTaskFormSubmit.dataset.TaskProjId = task.projId;
+  editTaskFormSubmit.addEventListener('click', (e) => submitEditTask(e));
+  editTaskFormSubmit.textContent = 'Submit';
 
   const editTaskFormCancel = document.createElement('button');
   editTaskFormCancel.textContent = 'Cancel';
@@ -110,9 +111,9 @@ const displayTask = (task)=>{
   editTaskFormCancel.dataset.TaskProjId = task.projId;
 
 
-  // editTaskFormCancel.addEventListener('click',  e => cancelEditTask(e));
+  editTaskFormCancel.addEventListener('click',  e => cancelEditTask(e));
 
-  editTaskFormButtons.append(editTaskFormCreate , editTaskFormCancel);
+  editTaskFormButtons.append(editTaskFormSubmit , editTaskFormCancel);
 
   editTaskFormWrapper.append(editTaskTitleInput, editTaskDescriptionInput, editPrioritySpan, editDateSpan, editTaskFormButtons);
 

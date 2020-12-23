@@ -128,30 +128,20 @@ const deleteTask = (e)=>{
   console.log(`after delete ${project.tasks}`);
 }
 
-const editTask = (e) => {
-  let taskId = e.target.dataset.TaskId;
-  let projId = e.target.dataset.TaskProjId;
-
-  const divShowMode = document.querySelector(`#task_show_mode_${projId}_${taskId}`);
-  divShowMode.classList.toggle('hide');
-
-  const divEditMode = document.querySelector(`#task_edit_mode_${projId}_${taskId}`);
-  divEditMode.classList.toggle('hide');
-}
-
 const cancelEditTask = (e) => {
   let taskId = e.target.dataset.TaskId;
   let projId = e.target.dataset.TaskProjId;
 
   let projectIndx = findProject(projectsList, projId);
   let project = projectsList[projectIndx];
-  let task = findProject(project.tasks, taskId);
+  let taskIndex = findProject(project.tasks, taskId);
+  let task = project.tasks[taskIndex];
 
   let titleInput = document.querySelector(`#edit_task_title_${projId}_${taskId}`);
   titleInput.value = task.title;
   let descriptionInput = document.querySelector(`#edit_task_description_${projId}_${taskId}`);
   descriptionInput.value = task.description;
-  let priorityInput = document.querySelector(`edit_task_priority_${projId}_${taskId}`);
+  let priorityInput = document.querySelector(`#edit_task_priority_${projId}_${taskId}`);
   priorityInput.value = task.priority;
 
   const divShowMode = document.querySelector(`#task_show_mode_${projId}_${taskId}`);
@@ -160,4 +150,28 @@ const cancelEditTask = (e) => {
   divEditMode.classList.toggle('hide');
 }
 
-export {openTab, addProject, cancelAddProject, deleteProject, editProject, cancelProject, submitEditProject , cancelAddTask , addTask, deleteTask, editTask ,cancelEditTask}
+const submitEditTask = (e)=>{
+  let taskId = e.target.dataset.TaskId;
+  let projId = e.target.dataset.TaskProjId;
+
+  let projectIndx = findProject(projectsList, projId);
+  let project = projectsList[projectIndx];
+  let taskIndex = findProject(project.tasks, taskId);
+  let task = project.tasks[taskIndex];
+
+  let titleInput = document.querySelector(`#edit_task_title_${projId}_${taskId}`);
+  task.title = titleInput.value;
+  let descriptionInput = document.querySelector(`#edit_task_description_${projId}_${taskId}`);
+  task.description = descriptionInput.value;
+  let priorityInput = document.querySelector(`#edit_task_priority_${projId}_${taskId}`);
+  task.priority = priorityInput.value;
+
+  console.log(projectsList);
+
+  const divShowMode = document.querySelector(`#task_show_mode_${projId}_${taskId}`);
+  divShowMode.classList.toggle('hide');
+  const divEditMode = document.querySelector(`#task_edit_mode_${projId}_${taskId}`);
+  divEditMode.classList.toggle('hide');
+}
+
+export {openTab, addProject, cancelAddProject, deleteProject, editProject, cancelProject, submitEditProject , cancelAddTask , addTask, deleteTask, cancelEditTask, submitEditTask}
