@@ -20,9 +20,11 @@ const addProject = () => {
   let input = document.querySelector('#project_title');
   let title = input.value;
   countProjects += 1;
+  localStorage.setItem('countProjects', JSON.stringify(countProjects));
   const project = new Project(title, countProjects);
   projectsList.push(project);
-  console.log(projectsList);
+  localStorage.setItem('projectsList', JSON.stringify(projectsList));
+  // console.log(projectsList);
   let tabs = document.querySelector('#tabs');
   tabs.append( displayProject(project) );
 

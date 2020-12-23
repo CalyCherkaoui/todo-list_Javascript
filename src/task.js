@@ -55,6 +55,10 @@ class Task{
     return this._status;
   }
 
+  set id(val){
+    this._id = val;
+  }
+
   set status(status){
     this._status = status;
   }

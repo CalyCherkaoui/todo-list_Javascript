@@ -1,10 +1,10 @@
-// import { id } from "date-fns/locale";
-
+const Project = require('./project').default;
+const Task = require('./task').default;
 const tasksContainer = document.createElement('div');
 tasksContainer.setAttribute('id', 'tasks_container');
 
-const projectsList = [];
-let countProjects = 0;
+const projectsListStored = localStorage.getItem('projectsList') ? JSON.parse(localStorage.getItem('projectsList')) : [];
+const countProjectsStored = localStorage.getItem('countProjects') ? JSON.parse(localStorage.getItem('countProjects')) : 0;
 
 const findProject = (array,id)=>{
   let min = 0;
@@ -41,4 +41,42 @@ const addTaskToProject = (array, id, task)=>{
   project.addTask(task);
 }
 
-export {projectsList, countProjects , deleteFromProjectList, editProjectTitle , tasksContainer, addTaskToProject, findProject};
+
+const parseJsonToTask = (objJson) => {
+  const title = objJson._title;
+  const description = objJson._description;
+  const dueDate = objJson._dueDate;
+  const priority = objJson._priority; // hight medium low
+  const status = objJson._status;// "todo"  ====> "progress" ===> "done"
+  const projId = objJson._projId;
+  const id = objJson._id;
+
+  const task = new Task(title, description, dueDate, priority, projId, id);
+  task.status = status;
+
+  return task;
+}
+
+const readProjectFromStorage = (objJson) => {
+  const title = objJson._title;
+  const id = objJson._id;
+  const tasks = objJson._tasks;
+
+  const project = new Project(title, id);
+
+  for(let i = 0 ; i < tasks.length; i += 1) {
+    let parsedTask = parseJsonToTask(tasks[i]);
+    parsedTask.id = i;
+    project.addTask(parsedTask);
+  }
+
+  return project;
+}
+
+const projectsList = projectsListStored.map( (elem) => { return readProjectFromStorage(elem)});
+console.log('variable');
+const countProjects = parseInt(countProjectsStored);
+
+export {projectsList, countProjects , deleteFromProjectList,
+       editProjectTitle , tasksContainer, addTaskToProject, 
+       findProject};
