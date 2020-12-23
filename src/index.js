@@ -42,3 +42,9 @@ const globalContainer = document.querySelector('#container');
 
 console.log('index');
 globalContainer.append(projectNav(projectsList) , tasksContainer);
+if (projectsList.length > 0){
+  console.log(`#proj_${projectsList[0].id}`);
+  let defaultShownTab = document.querySelector(`#proj_${projectsList[0].id}`);
+  console.log(document.querySelector(`#proj_${projectsList[0].id}`));
+  defaultShownTab.classList.add('shown');
+}

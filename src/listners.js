@@ -27,7 +27,13 @@ const addProject = () => {
   // console.log(projectsList);
   let tabs = document.querySelector('#tabs');
   tabs.append( displayProject(project) );
-
+  let actProjectShow = document.querySelector(`#proj_${project.id}`);
+  //====
+  let shown = document.querySelector('.shown');
+  if (shown !== null){
+    shown.classList.toggle('shown');
+  }
+  actProjectShow.classList.add('shown');
   let form = document.querySelector('#add_project_form');
   form.classList.toggle('hide');
 }
@@ -48,6 +54,16 @@ const deleteProject = (e)=>{
   deleteFromProjectList(projectsList,id);
   console.log(`after delete ${projectsList}`);
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
+  let tasksWrapper = document.querySelector(`#tasks_container`);
+  //Display default tab when the actual shown project is removed
+  let actProjectShow = document.querySelector(`#proj_${id}`);
+  tasksWrapper.removeChild(actProjectShow);
+  let shownProj = document.querySelector(`.shown`);
+  if (shownProj === null && projectsList.length > 0) {
+    let defaultShownTab = document.querySelector(`#proj_${projectsList[0].id}`);
+    defaultShownTab.classList.add('shown');
+  }
+
 }
 
 const editProject = (e) => {

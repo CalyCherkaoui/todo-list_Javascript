@@ -117,11 +117,10 @@ const projectNav = (projList) => {
   const tabsDiv = document.createElement('div');
   tabsDiv.setAttribute('id', 'tabs');
   
-  projList.forEach(element => {
+  projList.forEach((element) => {
     tabsDiv.append(displayProject(element));
     return tabsDiv;
   });
-
   divNavWrap.append(brand, addProj, addProjForm , tabsDiv);
   return divNavWrap;
 }
