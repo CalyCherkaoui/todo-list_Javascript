@@ -95,6 +95,8 @@ const submitEditProject = (e) => {
   spanShow.classList.toggle('hide');
   const spanEdit = document.querySelector(`#project_edit_mode_${id}`);
   spanEdit.classList.toggle('hide');
+  let defaultShownTab = document.querySelector(`#header_title_${id}`);
+  defaultShownTab.textContent = input.value;
 }
 
 const cancelAddTask = (e) => {

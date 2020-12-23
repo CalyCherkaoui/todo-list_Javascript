@@ -181,6 +181,7 @@ const taskNav = (myproject) => {
   header.setAttribute('class', 'project_header');
   const headerTitle = document.createElement('h2');
   headerTitle.setAttribute('class', 'header_title');
+  headerTitle.setAttribute('id', `header_title_${myproject.id}`);
   headerTitle.textContent = myproject.title;
 
 
