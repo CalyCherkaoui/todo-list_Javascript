@@ -4,7 +4,7 @@ class Task{
     this._description = description;
     this._dueDate = dueDate;
     this._priority = priority; // hight medium low
-    this._status = "todo";// "todo"  ====> "progress" ===> "done"
+    this._status = "To-do";// "todo"  ====> "progress" ===> "done"
     this._projId = projId;
     this._id = id;
   }

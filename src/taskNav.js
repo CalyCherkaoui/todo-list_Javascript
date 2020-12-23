@@ -104,6 +104,28 @@ const displayTask = (task)=>{
   editPrioritySelect.value = task.priority;
   editPrioritySpan.append(editPriorityLabel, editPrioritySelect);
 
+
+  const editStatusSpan = document.createElement('span');
+  editStatusSpan.setAttribute('class', 'edit_task_select_span');
+  const editStatusLabel = document.createElement('label');
+  editStatusLabel.textContent = 'Status:'
+  editStatusLabel.setAttribute('for', `edit_task_status_${task.projId}_${task.id}`);
+  const editStatusSelect = document.createElement('select');
+  editStatusSelect.setAttribute('id', `edit_task_status_${task.projId}_${task.id}`);
+  const editStatusOption1 = document.createElement('option');
+  editStatusOption1.setAttribute('value', 'To-do');
+  editStatusOption1.textContent = 'To-do';
+  const editStatusOption2 = document.createElement('option');
+  editStatusOption2.setAttribute('value', 'In-progress');
+  editStatusOption2.textContent = 'In progress';
+  const editStatusOption3 = document.createElement('option');
+  editStatusOption3.setAttribute('value', 'Done');
+  editStatusOption3.textContent = 'Done';
+  
+  editStatusSelect.append(editStatusOption1, editStatusOption2, editStatusOption3);
+  editStatusSelect.value = task.status;
+  editStatusSpan.append(editStatusLabel, editStatusSelect);
+
   const editDateSpan = document.createElement('span');
   editPrioritySpan.setAttribute('class', 'edit_task_date_span');
   const editDateLabel = document.createElement('label');
@@ -132,7 +154,7 @@ const displayTask = (task)=>{
 
   editTaskFormButtons.append(editTaskFormSubmit , editTaskFormCancel);
 
-  editTaskFormWrapper.append(editTaskTitleInput, editTaskDescriptionInput, editPrioritySpan, editDateSpan, editTaskFormButtons);
+  editTaskFormWrapper.append(editTaskTitleInput, editTaskDescriptionInput, editPrioritySpan, editStatusSpan, editDateSpan, editTaskFormButtons);
 
   //============================================
   divEditMode.append(editTaskFormWrapper);

@@ -142,6 +142,8 @@ const cancelEditTask = (e) => {
   descriptionInput.value = task.description;
   let priorityInput = document.querySelector(`#edit_task_priority_${projId}_${taskId}`);
   priorityInput.value = task.priority;
+  let statusInput = document.querySelector(`#edit_task_status_${projId}_${taskId}`);
+  statusInput.value = task.status;
 
   const divShowMode = document.querySelector(`#task_show_mode_${projId}_${taskId}`);
   divShowMode.classList.toggle('hide');
@@ -166,6 +168,9 @@ const submitEditTask = (e)=>{
   task.description = descriptionInput.value;
   let priorityInput = document.querySelector(`#edit_task_priority_${projId}_${taskId}`);
   task.priority = priorityInput.value;
+
+  let statusInput = document.querySelector(`#edit_task_status_${projId}_${taskId}`);
+  task.status = statusInput.value;
 
   const titleDisplay = document.querySelector(`#display_task_title_${projId}_${taskId}`);
   titleDisplay.textContent = task.title;
