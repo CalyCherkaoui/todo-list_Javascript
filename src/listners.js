@@ -85,7 +85,6 @@ const cancelAddTask = (e) => {
   descriptionInput.value = '';
   let priorityInput = document.querySelector(`#task_priority_${id}`);
   priorityInput.value = 'low';
-
   let form = document.querySelector(`#add_task_form_${id}`);
   form.classList.toggle('hide');
 }
@@ -158,6 +157,8 @@ const submitEditTask = (e)=>{
   let project = projectsList[projectIndx];
   let taskIndex = findProject(project.tasks, taskId);
   let task = project.tasks[taskIndex];
+  const priorityLast = task.priority;
+  const statusLast = task.status;
 
   let titleInput = document.querySelector(`#edit_task_title_${projId}_${taskId}`);
   task.title = titleInput.value;
@@ -166,7 +167,23 @@ const submitEditTask = (e)=>{
   let priorityInput = document.querySelector(`#edit_task_priority_${projId}_${taskId}`);
   task.priority = priorityInput.value;
 
-  console.log(projectsList);
+  const titleDisplay = document.querySelector(`#display_task_title_${projId}_${taskId}`);
+  titleDisplay.textContent = task.title;
+
+  const descriptionDisplay = document.querySelector(`#display_task_description_${projId}_${taskId}`);
+  descriptionDisplay.textContent = task.description;
+
+  const priorityDisplay = document.querySelector(`#display_task_priority_${projId}_${taskId}`);
+  priorityDisplay.classList.remove(`priority_box_${priorityLast}`);
+  priorityDisplay.classList.add(`priority_box_${task.priority}`);
+
+  // const dateDisplay = document.querySelector(`#display_task_date_${projId}_${taskId}`);
+  // dateDisplay.textContent = task.dueDtate;
+
+  const statusDisplay = document.querySelector(`#display_task_status_${projId}_${taskId}`);
+  statusDisplay.textContent = task.status;
+  statusDisplay.classList.remove(`task_status_${statusLast}`);
+  statusDisplay.classList.add(`task_status_${task.status}`);
 
   const divShowMode = document.querySelector(`#task_show_mode_${projId}_${taskId}`);
   divShowMode.classList.toggle('hide');

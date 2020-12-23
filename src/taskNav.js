@@ -16,8 +16,10 @@ const displayTask = (task)=>{
   const divShowModeLeft = document.createElement('div');
   divShowModeLeft.setAttribute('class', 'div_show_mode_left');
   const priorityBox = document.createElement('div');
+  priorityBox.setAttribute('id', `display_task_priority_${task.projId}_${task.id}`);
   priorityBox.classList.add(`priority_box_${task.priority}`, "priority_box");
   const taskTitle = document.createElement('h3');
+  taskTitle.setAttribute('id', `display_task_title_${task.projId}_${task.id}`);
   taskTitle.textContent = task.title;
   divShowModeLeft.append(priorityBox, taskTitle);
 
@@ -26,11 +28,7 @@ const displayTask = (task)=>{
 
   const spanDueDate = document.createElement('span');
   spanDueDate.textContent = task.dueDate;
-
-  const spanStatus = document.createElement('span');
-  spanStatus.setAttribute('id', `task_status_${task.status}`);
-  spanStatus.classList.add('task_status');
-  spanStatus.textContent = task.status;
+  spanDueDate.setAttribute('id', `display_task_date_${task.projId}_${task.id}`);
 
   const editTaskImage = new Image();
   editTaskImage.setAttribute('src', editTaskIcon);
@@ -46,7 +44,26 @@ const displayTask = (task)=>{
   deleteTaskImage.dataset.TaskProjId = task.projId;
   deleteTaskImage.addEventListener('click', e => deleteTask(e));
 
-  divShowModeRight.append(spanDueDate, spanStatus, editTaskImage, deleteTaskImage);
+  divShowModeRight.append(spanDueDate, editTaskImage, deleteTaskImage);
+
+  const divShowModeTop = document.createElement('div');
+  divShowModeTop.setAttribute('class', 'div_show_mode_top');
+  divShowModeTop.append(divShowModeLeft, divShowModeRight);
+  // description in the buttom
+
+  const divShowModeButtom = document.createElement('div');
+  divShowModeButtom.setAttribute('class', 'div_show_mode_buttom');
+
+  const spanDescription = document.createElement('span');
+  spanDescription.setAttribute('id', `display_task_description_${task.projId}_${task.id}`);
+  spanDescription.textContent = task.description;
+
+  const spanStatus = document.createElement('span');
+  spanStatus.setAttribute('id', `display_task_status_${task.projId}_${task.id}`);
+  spanStatus.classList.add('task_status', `task_status_${task.status}`);
+  spanStatus.textContent = task.status;
+
+  divShowModeButtom.append(spanDescription, spanStatus);
 
   // editing the task mode
 
@@ -120,7 +137,7 @@ const displayTask = (task)=>{
   //============================================
   divEditMode.append(editTaskFormWrapper);
 
-  divShowMode.append(divShowModeLeft, divShowModeRight);
+  divShowMode.append(divShowModeTop, divShowModeButtom);
   taskCard.append(divShowMode, divEditMode);
 
   return taskCard;
