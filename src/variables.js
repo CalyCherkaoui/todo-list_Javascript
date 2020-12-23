@@ -3,8 +3,14 @@ const Task = require('./task').default;
 const tasksContainer = document.createElement('div');
 tasksContainer.setAttribute('id', 'tasks_container');
 
-const projectsListStored = localStorage.getItem('projectsList') ? JSON.parse(localStorage.getItem('projectsList')) : [];
-const countProjectsStored = localStorage.getItem('countProjects') ? JSON.parse(localStorage.getItem('countProjects')) : 0;
+const defaultProject = new Project('My Project', 1);
+const defaultTask1 = new Task('My first task', 'This is my first task', '2020-12-24', 'low', 1, 0);
+const defaultTask2 = new Task('My second task', 'This is my second task', '2021-12-26', 'low', 1, 1);
+defaultProject.addTask(defaultTask1);
+defaultProject.addTask(defaultTask2);
+
+const projectsListStored = localStorage.getItem('projectsList') ? JSON.parse(localStorage.getItem('projectsList')) : [defaultProject];
+const countProjectsStored = localStorage.getItem('countProjects') ? JSON.parse(localStorage.getItem('countProjects')) : 1;
 
 const findProject = (array,id)=>{
   let min = 0;
@@ -41,7 +47,6 @@ const addTaskToProject = (array, id, task)=>{
   let project = array[target];
   project.addTask(task);
 }
-
 
 const parseJsonToTask = (objJson) => {
   const title = objJson._title;

@@ -29,6 +29,7 @@ class Project {
     // sort tasks later
     this._tasks.push(task);
     this._taskCounter += 1;
+    // task.id = this._taskCounter;
   }
 
   removeTask(id){
