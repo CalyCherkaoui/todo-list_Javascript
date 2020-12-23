@@ -40,8 +40,10 @@ const displayProject = (project) =>{
   deleteProjectImage.dataset.projectId = project.id;
   deleteProjectImage.addEventListener('click', e => deleteProject(e));
 
-
-  spanShowMode.append(btn, editProjectImage, deleteProjectImage);
+  const projectShowRightBtns = document.createElement('span');
+  projectShowRightBtns.classList.add('project_right_buttons');
+  projectShowRightBtns.append(editProjectImage, deleteProjectImage);
+  spanShowMode.append(btn, projectShowRightBtns);
 
 
   const editProjTitleInput = document.createElement('input');
@@ -62,7 +64,11 @@ const displayProject = (project) =>{
   cancelProjectImage.dataset.projectId = project.id;
   cancelProjectImage.addEventListener('click', e => cancelProject(e));
 
-  spanEditMode.append(editProjTitleInput, submitProjectImage, cancelProjectImage);
+  const projectEditRightBtns = document.createElement('span');
+  projectEditRightBtns.classList.add('project_right_buttons');
+  projectEditRightBtns.append(submitProjectImage, cancelProjectImage);
+
+  spanEditMode.append(editProjTitleInput, projectEditRightBtns);
 
   wraper.append(spanShowMode, spanEditMode);
 

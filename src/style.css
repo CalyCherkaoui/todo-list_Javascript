@@ -1,9 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&family=Ultra&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+/* global settings */
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+html {
+  min-width: 22rem;
+  min-height: 44rem;
+  display: block;
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  min-width: 22rem;
+  display: block;
+}
+
+/* events classes */
+
 .tabcontent {
   display: none;
 }
 
 .shown {
-  display: block;
+  display: block !important;
 }
 
 .add_proj_icon {
@@ -12,5 +42,87 @@
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
+
+/* grid */
+
+#container {
+  display: flex;
+  flex-direction: row;
+}
+
+#project_nav {
+  width: 30%;
+  min-height: 100vh;
+  background-color: #f1faee;
+  padding: 3rem 1rem;
+}
+
+#tasks_container {
+  width: 70%;
+  min-height: 100vh;
+  padding: 3rem 15%;
+}
+
+.logo_project {
+  font-size: 2rem;
+  font-family: 'Abril Fatface', cursive;
+  color: #e63946;
+  margin-bottom: 2rem;
+}
+
+#add_project {
+  width: 100%;
+  padding: 1rem 0.5rem;
+  border: none;
+  background-color: transparent;
+  border-bottom: 0.5px solid #457b9d;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #1d3557;
+}
+
+#add_project:hover {
+  background-color: #c9e9eb3a;
+  color: #e63946;
+}
+
+#tabs {
+  margin-top: 1rem;
+}
+
+.project_container {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 0.5px solid #b8e9eca8;
+}
+
+.span_project {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tablinks {
+  padding: 1rem 0.5rem;
+  background-color: transparent;
+  border: none;
+  color: #14213d;
+  font-size: 1rem;
+}
+
+.tablinks:hover {
+  background-color:  #f3f6f7e0;
+  color: #0077b6;
+}
+
+
