@@ -20,9 +20,9 @@ const addProject = () => {
   let input = document.querySelector('#project_title');
   let title = input.value;
   countProjects += 1;
-  localStorage.setItem('countProjects', JSON.stringify(countProjects));
   const project = new Project(title, countProjects);
   projectsList.push(project);
+  localStorage.setItem('countProjects', countProjects);
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
   // console.log(projectsList);
   let tabs = document.querySelector('#tabs');
@@ -47,6 +47,7 @@ const deleteProject = (e)=>{
   // remove from project list
   deleteFromProjectList(projectsList,id);
   console.log(`after delete ${projectsList}`);
+  localStorage.setItem('projectsList', JSON.stringify(projectsList));
 }
 
 const editProject = (e) => {
@@ -115,6 +116,7 @@ const addTask = (e) => {
 
   let form = document.querySelector(`#add_task_form_${id}`);
   form.classList.toggle('hide');
+  localStorage.setItem('projectsList', JSON.stringify(projectsList));
 }
 
 const deleteTask = (e)=>{
@@ -132,6 +134,7 @@ const deleteTask = (e)=>{
   project.removeTask(taskId);
 
   console.log(`after delete ${project.tasks}`);
+  localStorage.setItem('projectsList', JSON.stringify(projectsList));
 }
 
 const cancelEditTask = (e) => {
@@ -204,6 +207,7 @@ const submitEditTask = (e)=>{
   divShowMode.classList.toggle('hide');
   const divEditMode = document.querySelector(`#task_edit_mode_${projId}_${taskId}`);
   divEditMode.classList.toggle('hide');
+  localStorage.setItem('projectsList', JSON.stringify(projectsList));
 }
 
 export {openTab, addProject, cancelAddProject, deleteProject, editProject, cancelProject, submitEditProject , cancelAddTask , addTask, deleteTask, cancelEditTask, submitEditTask}

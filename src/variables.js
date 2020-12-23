@@ -33,6 +33,7 @@ const deleteFromProjectList = (projectsList , id)=>{
 const editProjectTitle = (projectsList , id, value)=>{
   let target = findProject(projectsList, id);
   projectsList[target].title = value;
+  localStorage.setItem('projectsList', JSON.stringify(projectsList));
 }
 
 const addTaskToProject = (array, id, task)=>{
@@ -75,8 +76,6 @@ const readProjectFromStorage = (objJson) => {
 
 const projectsList = projectsListStored.map( (elem) => { return readProjectFromStorage(elem)});
 console.log('variable');
-const countProjects = parseInt(countProjectsStored);
+let countProjects = parseInt(countProjectsStored);
 
-export {projectsList, countProjects , deleteFromProjectList,
-       editProjectTitle , tasksContainer, addTaskToProject, 
-       findProject};
+export {projectsList, countProjects , deleteFromProjectList, editProjectTitle , tasksContainer, addTaskToProject,  findProject};
