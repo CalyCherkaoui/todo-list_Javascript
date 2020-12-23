@@ -1,6 +1,7 @@
 import { projectsList, countProjects , deleteFromProjectList, editProjectTitle , addTaskToProject, findProject} from './variables';
 import { displayProject } from "./projectNav";
 import { displayTask } from "./taskNav";
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 const Project = require('./project').default;
 const Task = require('./task').default;
 
@@ -100,7 +101,11 @@ const addTask = (e) => {
   let description =  descriptionInput.value;
   let priorityInput = document.querySelector(`#task_priority_${id}`);
   let priority = priorityInput.value;
-  const task = new Task(title , description, 911, priority, id, project.taskCounter);
+
+  let dateInput = document.querySelector(`#task_date_${id}`);
+  let date = dateInput.value;
+
+  const task = new Task(title , description, date, priority, id, project.taskCounter);
   addTaskToProject(projectsList, id, task);
   // console.log(projectsList);
   let taskWrapper = document.querySelector(`#tasks_wrapper_${id}`);
@@ -169,6 +174,9 @@ const submitEditTask = (e)=>{
   let priorityInput = document.querySelector(`#edit_task_priority_${projId}_${taskId}`);
   task.priority = priorityInput.value;
 
+  let dateInput = document.querySelector(`#edit_task_date_${projId}_${taskId}`);
+  task.dueDate = dateInput.value;
+
   let statusInput = document.querySelector(`#edit_task_status_${projId}_${taskId}`);
   task.status = statusInput.value;
 
@@ -182,8 +190,8 @@ const submitEditTask = (e)=>{
   priorityDisplay.classList.remove(`priority_box_${priorityLast}`);
   priorityDisplay.classList.add(`priority_box_${task.priority}`);
 
-  // const dateDisplay = document.querySelector(`#display_task_date_${projId}_${taskId}`);
-  // dateDisplay.textContent = task.dueDtate;
+  const dateDisplay = document.querySelector(`#display_task_date_${projId}_${taskId}`);
+  dateDisplay.textContent = formatDistanceToNow(task.formatedDueDate(),{addSuffix: true});
 
   const statusDisplay = document.querySelector(`#display_task_status_${projId}_${taskId}`);
   statusDisplay.textContent = task.status;

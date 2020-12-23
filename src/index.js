@@ -17,12 +17,12 @@ let prj2 = new Project('Project2', 2);
 countProjects += 2;
 // const prjList = [prj1, prj2];
 
-let task1 = new Task('my task', 'dddddd', '12', 'low', 1, 1);
-let task2 = new Task('my task2', 'dddddd', '12', 'low', 1, 2);
+let task1 = new Task('my task', 'dddddd', '2020-12-24', 'low', 1, 1);
+let task2 = new Task('my task2', 'dddddd', '2020-12-24', 'low', 1, 2);
 prj1._taskCounter += 2;
 
-let task3 = new Task('my task3', 'dddddd', '12', 'low', 2, 1);
-let task4 = new Task('my task4', 'dddddd', '12', 'low', 2, 2);
+let task3 = new Task('my task3', 'dddddd', '2020-12-24', 'low', 2, 1);
+let task4 = new Task('my task4', 'dddddd', '2020-12-24', 'low', 2, 2);
 prj2._taskCounter += 2;
 
 prj1.addTask(task1);

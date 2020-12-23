@@ -2,6 +2,7 @@ import addTaskIcon from "./add.png";
 import { cancelAddTask , addTask, deleteTask, cancelEditTask , submitEditTask} from "./listners";
 import editTaskIcon from "./pencil.png";
 import deleteTaskIcon  from "./cancel.png";
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const displayTask = (task)=>{
   const taskCard = document.createElement('div');
@@ -27,7 +28,7 @@ const displayTask = (task)=>{
   divShowModeRight.setAttribute('class', 'div_show_mode_right');
 
   const spanDueDate = document.createElement('span');
-  spanDueDate.textContent = task.dueDate;
+  spanDueDate.textContent = formatDistanceToNow(task.formatedDueDate(),{addSuffix: true});
   spanDueDate.setAttribute('id', `display_task_date_${task.projId}_${task.id}`);
 
   const editTaskImage = new Image();

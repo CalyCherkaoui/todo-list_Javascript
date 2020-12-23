@@ -58,6 +58,11 @@ class Task{
   set status(status){
     this._status = status;
   }
+
+  formatedDueDate(){
+    let date = new Date(this._dueDate);
+    return date;
+  }
 }
 
 export default Task;
