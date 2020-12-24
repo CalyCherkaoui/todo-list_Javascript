@@ -4,7 +4,7 @@
 
 In this application, we created a To-do list application that stores Projects and their respective tasks with differents properties.
 
-To build this application We used:
+To build this application we used:
 
 - Javascript ES6
 - Webpack
@@ -20,11 +20,10 @@ To build this application We used:
 ## Features
 
 The features implemented with this project are:
-
-- User can create a project by entring its title
-- User can edit or delete a project from the the project list
+- User can create a project by entering its title
+- User can edit or delete a project from the project list
 - User can create tasks for each project
-- User can Edit or Delete tasks
+- User can edit or delete tasks
 ## Getting started (Development)
 
 To get a local copy of the repository please run the following commands on your terminal:
