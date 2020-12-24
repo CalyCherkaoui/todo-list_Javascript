@@ -56,6 +56,7 @@ const displayTask = (task)=>{
   divShowModeButtom.setAttribute('class', 'div_show_mode_buttom');
 
   const spanDescription = document.createElement('span');
+  spanDescription.classList.add('display_task_description');
   spanDescription.setAttribute('id', `display_task_description_${task.projId}_${task.id}`);
   spanDescription.textContent = task.description;
 

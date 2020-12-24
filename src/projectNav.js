@@ -1,5 +1,5 @@
 import { addProject, openTab, cancelAddProject , deleteProject, editProject, cancelProject, submitEditProject} from "./listners";
-import addProjIcon from "./playlist.png";
+import addProjIcon from "./add.png";
 import editProjectIcon from "./pencil.png";
 import submitProjectIcon from "./check.png";
 import cancelProjectIcon from "./close.png";
