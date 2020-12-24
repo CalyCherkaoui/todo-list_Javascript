@@ -15,7 +15,7 @@ To build this application we used:
 
 ## Live-Demo
 
-[My to-do list]()
+[My to-do list](https://calycherkaoui.github.io/todo-list_Javascript/)
 
 ## Features
 
