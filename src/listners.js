@@ -198,7 +198,9 @@ const submitEditTask = (e)=>{
   task.priority = priorityInput.value;
 
   let dateInput = document.querySelector(`#edit_task_date_${projId}_${taskId}`);
-  task.dueDate = dateInput.value;
+  if (dateInput.value !== ""){
+    task.dueDate = dateInput.value;
+  }
 
   let statusInput = document.querySelector(`#edit_task_status_${projId}_${taskId}`);
   task.status = statusInput.value;

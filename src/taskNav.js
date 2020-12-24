@@ -3,6 +3,7 @@ import { cancelAddTask , addTask, deleteTask, cancelEditTask , submitEditTask} f
 import editTaskIcon from "./pencil.png";
 import deleteTaskIcon  from "./cancel.png";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import formatISO from 'date-fns/formatISO';
 
 const displayTask = (task)=>{
   const taskCard = document.createElement('div');
@@ -151,6 +152,7 @@ const displayTask = (task)=>{
   const editDateInput = document.createElement('input');
   editDateInput.setAttribute('type', 'date');
   editDateInput.setAttribute('id', `edit_task_date_${task.projId}_${task.id}`);
+  editDateInput.value = task.dueDate;
   editDateSpan.append(editDateLabel, editDateInput);
 
   const editTaskFormButtons = document.createElement('div');
@@ -277,6 +279,7 @@ const taskNav = (myproject) => {
   const addDateInput = document.createElement('input');
   addDateInput.setAttribute('type', 'date');
   addDateInput.setAttribute('id', `task_date_${myproject.id}`);
+  addDateInput.value = formatISO(new Date(), { representation: 'date' });
   addDateSpan.append(addDateLabel, addDateInput);
 
   const addTaskFormButtons = document.createElement('div');
