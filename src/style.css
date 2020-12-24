@@ -259,3 +259,98 @@ body {
   background-color: #00a8975d;
   border: #00a896 0.5px solid;
 }
+
+/* forms */
+
+input {
+  padding: 0.1rem 0.3rem;
+  /* border-radius: 5px; */
+  border: 0.5px solid #0076b688;
+}
+
+input::placeholder {
+  font-size: 0.7rem;
+  color: rgb(112, 109, 109);
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #14213d;
+  margin-right: 0.5rem;
+}
+
+#project_title {
+  width: 100%;
+}
+
+#add_project_form {
+  margin-top: 0.3rem;
+  background-color: white;
+  border-radius: 1px;
+  padding: 1rem;
+}
+
+.add_project_form_buttons {
+  margin-top: 0.5rem;
+  display: flex;
+}
+
+.add_project_form_buttons button {
+  flex-grow: 1;
+}
+
+.submit_btn {
+  color: #1d3557;
+  background-color: #219dbc5e;
+  border-radius: 2px;
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.submit_btn:hover {
+  background-color: #1d3557;
+  color: white;
+}
+
+.cancel_btn {
+  color: #e63946;
+  background-color: #e6394759;
+  border-radius: 2px;
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.cancel_btn:hover {
+  background-color: #e63946;
+  color: white;
+}
+
+.edit_task_form_wrapper {
+  padding: 0.7rem;
+  border: 0.5px solid #a8dadc;
+}
+
+.edit_task_input_container {
+  margin-bottom: 0.5rem;
+}
+
+.edit_task_select_span {
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.edit_task_form_buttons {
+  margin-top: 0.5rem;
+  display: flex;
+  width: 100%;
+}
+
+.edit_task_form_buttons button {
+  flex-grow: 1;
+}
+
+.add_task_form_wrapper {
+  padding: 0.7rem;
+  border: 0.5px solid #a8dadc;
+}

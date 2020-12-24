@@ -107,12 +107,14 @@ const projectNav = (projList) => {
   addProjTitleInput.setAttribute('placeholder', 'Type your project title here!');
   const addProjectFormButtons = document.createElement('div');
   addProjectFormButtons.setAttribute('class', 'add_project_form_buttons');
+
   const addProjectFormCreate = document.createElement('button');
-
+  addProjectFormCreate.classList.add('submit_btn');
   addProjectFormCreate.addEventListener('click', () => addProject());
-
   addProjectFormCreate.textContent = 'Create Project';
+
   const addProjectFormCancel = document.createElement('button');
+  addProjectFormCancel.classList.add('cancel_btn');
   addProjectFormCancel.textContent = 'Cancel';
 
   addProjectFormCancel.addEventListener('click', () => cancelAddProject());

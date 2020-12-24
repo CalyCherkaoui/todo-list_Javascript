@@ -75,15 +75,30 @@ const displayTask = (task)=>{
   // Edit Form
   const editTaskFormWrapper = document.createElement('div');
   editTaskFormWrapper.classList.add('edit_task_form_wrapper');
+
+  const editTaskTitleDiv = document.createElement('div');
+  editTaskTitleDiv.classList.add('edit_task_input_container');
+  const editTaskTiteLabel = document.createElement('label');
+  editTaskTiteLabel.setAttribute('for', `edit_task_title_${task.projId}_${task.id}`);
+  editTaskTiteLabel.textContent = 'Task title:';
   const editTaskTitleInput = document.createElement('input');
   editTaskTitleInput.setAttribute('type', 'text');
   editTaskTitleInput.setAttribute('id', `edit_task_title_${task.projId}_${task.id}`);
   editTaskTitleInput.setAttribute('value', task.title);
 
+  editTaskTitleDiv.append(editTaskTiteLabel, editTaskTitleInput);
+
+  const editTaskDescriptionDiv = document.createElement('div');
+  editTaskDescriptionDiv.classList.add('edit_task_input_container');
+  const editTaskDescriptionLabel = document.createElement('label');
+  editTaskDescriptionLabel.setAttribute('for', `edit_task_description_${task.projId}_${task.id}`);
+  editTaskDescriptionLabel.textContent = 'Task Description:';
   const editTaskDescriptionInput = document.createElement('input');
   editTaskDescriptionInput.setAttribute('type', 'text');
   editTaskDescriptionInput.setAttribute('id', `edit_task_description_${task.projId}_${task.id}`);
   editTaskDescriptionInput.setAttribute('value', task.description);
+
+  editTaskDescriptionDiv.append(editTaskDescriptionLabel, editTaskDescriptionInput);
 
   const editPrioritySpan = document.createElement('span');
   editPrioritySpan.setAttribute('class', 'edit_task_select_span');
@@ -129,7 +144,7 @@ const displayTask = (task)=>{
   editStatusSpan.append(editStatusLabel, editStatusSelect);
 
   const editDateSpan = document.createElement('span');
-  editPrioritySpan.setAttribute('class', 'edit_task_date_span');
+  editDateSpan.setAttribute('class', 'edit_task_select_span');
   const editDateLabel = document.createElement('label');
   editDateLabel.textContent = 'Schedule:'
   editDateLabel.setAttribute('for', `edit_task_date_${task.projId}_${task.id}`);
@@ -141,12 +156,14 @@ const displayTask = (task)=>{
   const editTaskFormButtons = document.createElement('div');
   editTaskFormButtons.setAttribute('class', 'edit_task_form_buttons');
   const editTaskFormSubmit = document.createElement('button');
+  editTaskFormSubmit.classList.add('submit_btn');
   editTaskFormSubmit.dataset.TaskId = task.id;
   editTaskFormSubmit.dataset.TaskProjId = task.projId;
   editTaskFormSubmit.addEventListener('click', (e) => submitEditTask(e));
   editTaskFormSubmit.textContent = 'Submit';
 
   const editTaskFormCancel = document.createElement('button');
+  editTaskFormCancel.classList.add('cancel_btn');
   editTaskFormCancel.textContent = 'Cancel';
   editTaskFormCancel.dataset.TaskId = task.id;
   editTaskFormCancel.dataset.TaskProjId = task.projId;
@@ -156,7 +173,7 @@ const displayTask = (task)=>{
 
   editTaskFormButtons.append(editTaskFormSubmit , editTaskFormCancel);
 
-  editTaskFormWrapper.append(editTaskTitleInput, editTaskDescriptionInput, editPrioritySpan, editStatusSpan, editDateSpan, editTaskFormButtons);
+  editTaskFormWrapper.append(editTaskTitleDiv, editTaskDescriptionDiv, editPrioritySpan, editStatusSpan, editDateSpan, editTaskFormButtons);
 
   //============================================
   divEditMode.append(editTaskFormWrapper);
