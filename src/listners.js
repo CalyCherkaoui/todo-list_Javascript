@@ -11,7 +11,7 @@ import cancelProjectIcon from './close.png';
 import editProjectIcon from './pencil.png';
 import deleteProjectIcon from './cancel.png';
 
-let projectsCounter = countProjects
+let projectsCounter = countProjects;
 
 const Project = require('./project').default;
 const Task = require('./task').default;
@@ -601,15 +601,14 @@ const displayProject = (project) => {
 const addProject = () => {
   const input = document.querySelector('#project_title');
   const title = input.value;
-  countProjects += 1;
-  const project = new Project(title, countProjects);
+  projectsCounter += 1;
+  const project = new Project(title, projectsCounter);
   projectsList.push(project);
-  localStorage.setItem('countProjects', countProjects);
+  localStorage.setItem('countProjects', projectsCounter);
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
   const tabs = document.querySelector('#tabs');
   tabs.append(displayProject(project));
   const actProjectShow = document.querySelector(`#proj_${project.id}`);
-  //= ===
   const shown = document.querySelector('.shown');
   if (shown !== null) {
     shown.classList.toggle('shown');
