@@ -1,15 +1,18 @@
-import { addProject, openTab, cancelAddProject , deleteProject, editProject, cancelProject, submitEditProject} from "./listners";
-import addProjIcon from "./add.png";
-import editProjectIcon from "./pencil.png";
-import submitProjectIcon from "./check.png";
-import cancelProjectIcon from "./close.png";
-import deleteProjectIcon  from "./cancel.png";
-import { tasksContainer } from "./variables";
-import { taskNav } from "./taskNav";
+import {
+  addProject, openTab, cancelAddProject, deleteProject,
+  editProject, cancelProject, submitEditProject,
+} from './listners';
+import addProjIcon from './add.png';
+import editProjectIcon from './pencil.png';
+import submitProjectIcon from './check.png';
+import cancelProjectIcon from './close.png';
+import deleteProjectIcon from './cancel.png';
+import { tasksContainer } from './variables';
+import { taskNav } from './taskNav';
 
-const displayProject = (project) =>{
+const displayProject = (project) => {
   const wraper = document.createElement('div');
-  wraper.setAttribute('id' , `project_container_${project.id}`);
+  wraper.setAttribute('id', `project_container_${project.id}`);
   wraper.classList.add('project_container');
 
   const spanShowMode = document.createElement('span');
@@ -23,7 +26,7 @@ const displayProject = (project) =>{
   const btn = document.createElement('button');
   btn.setAttribute('id', `show_project_title_${project.id}`);
   btn.dataset.projectId = project.id;
-  btn.addEventListener('click',(e)=> openTab(e));
+  btn.addEventListener('click', (e) => openTab(e));
   btn.setAttribute('class', 'tablinks');
   btn.textContent = project.title;
 
@@ -33,7 +36,7 @@ const displayProject = (project) =>{
   editProjectImage.dataset.projectId = project.id;
   editProjectImage.addEventListener('click', e => editProject(e));
 
-  
+
   const deleteProjectImage = new Image();
   deleteProjectImage.setAttribute('src', deleteProjectIcon);
   deleteProjectImage.setAttribute('class', 'add_proj_icon');
@@ -75,10 +78,9 @@ const displayProject = (project) =>{
   tasksContainer.append(taskNav(project));
 
   return wraper;
-}
+};
 
 const projectNav = (projList) => {
-
   const divNavWrap = document.createElement('div');
   divNavWrap.setAttribute('id', 'project_nav');
 
@@ -92,7 +94,7 @@ const projectNav = (projList) => {
   addProjectImage.setAttribute('src', addProjIcon);
   addProjectImage.setAttribute('class', 'add_proj_icon');
   const addProjText = document.createElement('span');
-  addProjText.textContent = "Projects";
+  addProjText.textContent = 'Projects';
   addProj.append(addProjText, addProjectImage);
   addProj.addEventListener('click', () => cancelAddProject());
 
@@ -103,7 +105,7 @@ const projectNav = (projList) => {
   addProjForm.classList.add('hide');
   const addProjTitleInput = document.createElement('input');
   addProjTitleInput.setAttribute('type', 'text');
-  addProjTitleInput.setAttribute('id', "project_title");
+  addProjTitleInput.setAttribute('id', 'project_title');
   addProjTitleInput.setAttribute('placeholder', 'Type your project title here!');
   const addProjectFormButtons = document.createElement('div');
   addProjectFormButtons.setAttribute('class', 'add_project_form_buttons');
@@ -119,18 +121,18 @@ const projectNav = (projList) => {
 
   addProjectFormCancel.addEventListener('click', () => cancelAddProject());
 
-  addProjectFormButtons.append(addProjectFormCreate,addProjectFormCancel);
+  addProjectFormButtons.append(addProjectFormCreate, addProjectFormCancel);
   addProjForm.append(addProjTitleInput, addProjectFormButtons);
 
   const tabsDiv = document.createElement('div');
   tabsDiv.setAttribute('id', 'tabs');
-  
+
   projList.forEach((element) => {
     tabsDiv.append(displayProject(element));
     return tabsDiv;
   });
-  divNavWrap.append(brand, addProj, addProjForm , tabsDiv);
+  divNavWrap.append(brand, addProj, addProjForm, tabsDiv);
   return divNavWrap;
-}
+};
 
-export {projectNav , displayProject};
+export { projectNav, displayProject };

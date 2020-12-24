@@ -1,40 +1,43 @@
+/* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
+
 class Project {
-  constructor(title, id){
+  constructor(title, id) {
     this._title = title;
     this._tasks = [];
     this._id = id;
     this._taskCounter = 0;
   }
-  get title(){
+
+  get title() {
     return this._title;
   }
 
-  get id(){
+  get id() {
     return this._id;
   }
 
-  get taskCounter(){
+  get taskCounter() {
     return this._taskCounter;
   }
 
-  set title(title){
+  set title(title) {
     this._title = title;
   }
 
-  get tasks(){
+  get tasks() {
     return this._tasks;
   }
 
-  addTask(task){
+  addTask(task) {
     // sort tasks later
     this._tasks.push(task);
     this._taskCounter += 1;
     // task.id = this._taskCounter;
   }
 
-  removeTask(id){
+  removeTask(id) {
     // find index of task by id
-    this._tasks.splice(id,1);//id ===> transformer en index
+    this._tasks.splice(id, 1);// id ===> transformer en index
   }
 }
 

@@ -1,11 +1,13 @@
-import addTaskIcon from "./add.png";
-import { cancelAddTask , addTask, deleteTask, cancelEditTask , submitEditTask} from "./listners";
-import editTaskIcon from "./pencil.png";
-import deleteTaskIcon  from "./cancel.png";
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import formatISO from 'date-fns/formatISO';
+import addTaskIcon from './add.png';
+import {
+  cancelAddTask, addTask, deleteTask, cancelEditTask, submitEditTask,
+} from './listners';
+import editTaskIcon from './pencil.png';
+import deleteTaskIcon from './cancel.png';
 
-const displayTask = (task)=>{
+const displayTask = (task) => {
   const taskCard = document.createElement('div');
   taskCard.setAttribute('class', 'task_card');
   taskCard.setAttribute('id', `task_card_${task.projId}_${task.id}`);
@@ -19,7 +21,7 @@ const displayTask = (task)=>{
   divShowModeLeft.setAttribute('class', 'div_show_mode_left');
   const priorityBox = document.createElement('div');
   priorityBox.setAttribute('id', `display_task_priority_${task.projId}_${task.id}`);
-  priorityBox.classList.add(`priority_box_${task.priority}`, "priority_box");
+  priorityBox.classList.add(`priority_box_${task.priority}`, 'priority_box');
   const taskTitle = document.createElement('h3');
   taskTitle.setAttribute('id', `display_task_title_${task.projId}_${task.id}`);
   taskTitle.textContent = task.title;
@@ -29,7 +31,7 @@ const displayTask = (task)=>{
   divShowModeRight.setAttribute('class', 'div_show_mode_right');
 
   const spanDueDate = document.createElement('span');
-  spanDueDate.textContent = formatDistanceToNow(task.formatedDueDate(),{addSuffix: true});
+  spanDueDate.textContent = formatDistanceToNow(task.formatedDueDate(), { addSuffix: true });
   spanDueDate.setAttribute('id', `display_task_date_${task.projId}_${task.id}`);
 
   const editTaskImage = new Image();
@@ -104,7 +106,7 @@ const displayTask = (task)=>{
   const editPrioritySpan = document.createElement('span');
   editPrioritySpan.setAttribute('class', 'edit_task_select_span');
   const editPriorityLabel = document.createElement('label');
-  editPriorityLabel.textContent = 'Priority:'
+  editPriorityLabel.textContent = 'Priority:';
   editPriorityLabel.setAttribute('for', `edit_task_priority_${task.projId}_${task.id}`);
   const editPrioritySelect = document.createElement('select');
   editPrioritySelect.setAttribute('id', `edit_task_priority_${task.projId}_${task.id}`);
@@ -117,7 +119,7 @@ const displayTask = (task)=>{
   const editPriorityOption3 = document.createElement('option');
   editPriorityOption3.setAttribute('value', 'low');
   editPriorityOption3.textContent = 'Low';
-  
+
   editPrioritySelect.append(editPriorityOption1, editPriorityOption2, editPriorityOption3);
   editPrioritySelect.value = task.priority;
   editPrioritySpan.append(editPriorityLabel, editPrioritySelect);
@@ -126,7 +128,7 @@ const displayTask = (task)=>{
   const editStatusSpan = document.createElement('span');
   editStatusSpan.setAttribute('class', 'edit_task_select_span');
   const editStatusLabel = document.createElement('label');
-  editStatusLabel.textContent = 'Status:'
+  editStatusLabel.textContent = 'Status:';
   editStatusLabel.setAttribute('for', `edit_task_status_${task.projId}_${task.id}`);
   const editStatusSelect = document.createElement('select');
   editStatusSelect.setAttribute('id', `edit_task_status_${task.projId}_${task.id}`);
@@ -139,7 +141,7 @@ const displayTask = (task)=>{
   const editStatusOption3 = document.createElement('option');
   editStatusOption3.setAttribute('value', 'Done');
   editStatusOption3.textContent = 'Done';
-  
+
   editStatusSelect.append(editStatusOption1, editStatusOption2, editStatusOption3);
   editStatusSelect.value = task.status;
   editStatusSpan.append(editStatusLabel, editStatusSelect);
@@ -147,7 +149,7 @@ const displayTask = (task)=>{
   const editDateSpan = document.createElement('span');
   editDateSpan.setAttribute('class', 'edit_task_select_span');
   const editDateLabel = document.createElement('label');
-  editDateLabel.textContent = 'Schedule:'
+  editDateLabel.textContent = 'Schedule:';
   editDateLabel.setAttribute('for', `edit_task_date_${task.projId}_${task.id}`);
   const editDateInput = document.createElement('input');
   editDateInput.setAttribute('type', 'date');
@@ -171,20 +173,21 @@ const displayTask = (task)=>{
   editTaskFormCancel.dataset.TaskProjId = task.projId;
 
 
-  editTaskFormCancel.addEventListener('click',  e => cancelEditTask(e));
+  editTaskFormCancel.addEventListener('click', e => cancelEditTask(e));
 
-  editTaskFormButtons.append(editTaskFormSubmit , editTaskFormCancel);
+  editTaskFormButtons.append(editTaskFormSubmit, editTaskFormCancel);
 
-  editTaskFormWrapper.append(editTaskTitleDiv, editTaskDescriptionDiv, editPrioritySpan, editStatusSpan, editDateSpan, editTaskFormButtons);
+  editTaskFormWrapper.append(editTaskTitleDiv, editTaskDescriptionDiv, editPrioritySpan,
+    editStatusSpan, editDateSpan, editTaskFormButtons);
 
-  //============================================
+  //= ===========================================
   divEditMode.append(editTaskFormWrapper);
 
   divShowMode.append(divShowModeTop, divShowModeButtom);
   taskCard.append(divShowMode, divEditMode);
 
   return taskCard;
-}
+};
 
 const taskNav = (myproject) => {
   // wrapper
@@ -200,7 +203,7 @@ const taskNav = (myproject) => {
   headerTitle.textContent = myproject.title;
 
   // add task header
-  
+
   const headerAddTask = document.createElement('button');
   headerAddTask.dataset.projectId = myproject.id;
   headerAddTask.addEventListener('click', e => cancelAddTask(e));
@@ -213,7 +216,6 @@ const taskNav = (myproject) => {
   addTaskSpan.setAttribute('class', 'add_task_span');
   addTaskSpan.textContent = 'Add a Task';
   headerAddTask.append(addTaskImage, addTaskSpan);
-
 
 
   header.append(headerTitle, headerAddTask);
@@ -254,7 +256,7 @@ const taskNav = (myproject) => {
   const addPrioritySpan = document.createElement('span');
   addPrioritySpan.setAttribute('class', 'add_task_select_span');
   const addPriorityLabel = document.createElement('label');
-  addPriorityLabel.textContent = 'Priority:'
+  addPriorityLabel.textContent = 'Priority:';
   addPriorityLabel.setAttribute('for', `task_priority_${myproject.id}`);
   const addPrioritySelect = document.createElement('select');
   addPrioritySelect.setAttribute('id', `task_priority_${myproject.id}`);
@@ -274,7 +276,7 @@ const taskNav = (myproject) => {
   const addDateSpan = document.createElement('span');
   addPrioritySpan.setAttribute('class', 'add_task_date_span');
   const addDateLabel = document.createElement('label');
-  addDateLabel.textContent = 'Schedule:'
+  addDateLabel.textContent = 'Schedule:';
   addDateLabel.setAttribute('for', `task_date_${myproject.id}`);
   const addDateInput = document.createElement('input');
   addDateInput.setAttribute('type', 'date');
@@ -294,26 +296,27 @@ const taskNav = (myproject) => {
   addTaskFormCancel.classList.add('cancel_btn');
   addTaskFormCancel.textContent = 'Cancel';
   addTaskFormCancel.dataset.projectId = myproject.id;
-  addTaskFormCancel.addEventListener('click',  e => cancelAddTask(e));
+  addTaskFormCancel.addEventListener('click', e => cancelAddTask(e));
 
-  addTaskFormButtons.append(addTaskFormCreate , addTaskFormCancel);
+  addTaskFormButtons.append(addTaskFormCreate, addTaskFormCancel);
 
-  addTaskFormWrapper.append(addTaskTitleDiv, addTaskDescriptionDiv, addPrioritySpan, addDateSpan, addTaskFormButtons);
+  addTaskFormWrapper.append(addTaskTitleDiv, addTaskDescriptionDiv,
+    addPrioritySpan, addDateSpan, addTaskFormButtons);
 
   // tasks wrapper
-  
+
   const tasksWrapper = document.createElement('div');
   tasksWrapper.setAttribute('id', `tasks_wrapper_${myproject.id}`);
   tasksWrapper.setAttribute('class', 'tasks_wrapper');
 
-  myproject.tasks.forEach( element => {
+  myproject.tasks.forEach(element => {
     tasksWrapper.append(displayTask(element));
     return tasksWrapper;
   });
 
   divNavWrap.append(header, addTaskFormWrapper, tasksWrapper);
   return divNavWrap;
-}
+};
 
 
-export {taskNav , displayTask};
+export { taskNav, displayTask };

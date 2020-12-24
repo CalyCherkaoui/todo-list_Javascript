@@ -1,5 +1,8 @@
+/* eslint no-underscore-dangle: ["error", { "allow": ["_title", "_tasks", "_id" , "_taskCounter" ,
+ "_description", "_dueDate" , "_status" , "_priority" , "_projId"] }] */
 const Project = require('./project').default;
 const Task = require('./task').default;
+
 const tasksContainer = document.createElement('div');
 tasksContainer.setAttribute('id', 'tasks_container');
 
@@ -12,7 +15,7 @@ defaultProject.addTask(defaultTask2);
 const projectsListStored = localStorage.getItem('projectsList') ? JSON.parse(localStorage.getItem('projectsList')) : [defaultProject];
 const countProjectsStored = localStorage.getItem('countProjects') ? JSON.parse(localStorage.getItem('countProjects')) : 1;
 
-const findProject = (array,id)=>{
+const findProject = (array, id) => {
   let min = 0;
   let max = array.length - 1;
   let i = Math.floor((min + max) / 2);
@@ -29,24 +32,24 @@ const findProject = (array,id)=>{
     }
   }
   return i;
-}
+};
 
-const deleteFromProjectList = (projectsList , id)=>{
-  let target = findProject(projectsList, id);
-  projectsList.splice(target , 1);
-}
+const deleteFromProjectList = (projectsList, id) => {
+  const target = findProject(projectsList, id);
+  projectsList.splice(target, 1);
+};
 
-const editProjectTitle = (projectsList , id, value)=>{
-  let target = findProject(projectsList, id);
+const editProjectTitle = (projectsList, id, value) => {
+  const target = findProject(projectsList, id);
   projectsList[target].title = value;
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
-}
+};
 
-const addTaskToProject = (array, id, task)=>{
-  let target = findProject(array, id);
-  let project = array[target];
+const addTaskToProject = (array, id, task) => {
+  const target = findProject(array, id);
+  const project = array[target];
   project.addTask(task);
-}
+};
 
 const parseJsonToTask = (objJson) => {
   const title = objJson._title;
@@ -61,7 +64,7 @@ const parseJsonToTask = (objJson) => {
   task.status = status;
 
   return task;
-}
+};
 
 const readProjectFromStorage = (objJson) => {
   const title = objJson._title;
@@ -70,17 +73,19 @@ const readProjectFromStorage = (objJson) => {
 
   const project = new Project(title, id);
 
-  for(let i = 0 ; i < tasks.length; i += 1) {
-    let parsedTask = parseJsonToTask(tasks[i]);
+  for (let i = 0; i < tasks.length; i += 1) {
+    const parsedTask = parseJsonToTask(tasks[i]);
     parsedTask.id = i;
     project.addTask(parsedTask);
   }
 
   return project;
-}
+};
 
-const projectsList = projectsListStored.map( (elem) => { return readProjectFromStorage(elem)});
-console.log('variable');
-let countProjects = parseInt(countProjectsStored);
+const projectsList = projectsListStored.map((elem) => readProjectFromStorage(elem));
+const countProjects = parseInt(countProjectsStored, 10);
 
-export {projectsList, countProjects , deleteFromProjectList, editProjectTitle , tasksContainer, addTaskToProject,  findProject};
+export {
+  projectsList, countProjects, deleteFromProjectList,
+  editProjectTitle, tasksContainer, addTaskToProject, findProject,
+};

@@ -1,81 +1,83 @@
-import { projectsList, countProjects , deleteFromProjectList, editProjectTitle , addTaskToProject, findProject} from './variables';
-import { displayProject } from "./projectNav";
-import { displayTask } from "./taskNav";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import {
+  projectsList, countProjects, deleteFromProjectList,
+  editProjectTitle, addTaskToProject, findProject,
+} from './variables';
+import { displayProject } from './projectNav';
+import { displayTask } from './taskNav';
+
 const Project = require('./project').default;
 const Task = require('./task').default;
 
-const openTab = (e)=>{
-  // console.log(`ayee chez ${e.target.dataset.projectId}`);
-  let id = e.target.dataset.projectId;
-  let projectDiv = document.querySelector(`#proj_${id}`);
-  let shown = document.querySelector('.shown');
-  if (shown !== null){
+
+
+const openTab = (e) => {
+  const id = e.target.dataset.projectId;
+  const projectDiv = document.querySelector(`#proj_${id}`);
+  const shown = document.querySelector('.shown');
+  if (shown !== null) {
     shown.classList.toggle('shown');
   }
   projectDiv.classList.toggle('shown');
-}
+};
 
 const addProject = () => {
-  let input = document.querySelector('#project_title');
-  let title = input.value;
+  const input = document.querySelector('#project_title');
+  const title = input.value;
   countProjects += 1;
   const project = new Project(title, countProjects);
   projectsList.push(project);
   localStorage.setItem('countProjects', countProjects);
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
-  // console.log(projectsList);
-  let tabs = document.querySelector('#tabs');
-  tabs.append( displayProject(project) );
-  let actProjectShow = document.querySelector(`#proj_${project.id}`);
-  //====
-  let shown = document.querySelector('.shown');
-  if (shown !== null){
+  const tabs = document.querySelector('#tabs');
+  tabs.append(displayProject(project));
+  const actProjectShow = document.querySelector(`#proj_${project.id}`);
+  //= ===
+  const shown = document.querySelector('.shown');
+  if (shown !== null) {
     shown.classList.toggle('shown');
   }
   actProjectShow.classList.add('shown');
-  let form = document.querySelector('#add_project_form');
+  const form = document.querySelector('#add_project_form');
   form.classList.toggle('hide');
-}
+};
 
 const cancelAddProject = () => {
-  let input = document.querySelector('#project_title');
+  const input = document.querySelector('#project_title');
   input.value = '';
-  let form = document.querySelector('#add_project_form');
+  const form = document.querySelector('#add_project_form');
   form.classList.toggle('hide');
-}
+};
 
-const deleteProject = (e)=>{
-  let id = e.target.dataset.projectId;
-  let wrapper =  document.querySelector(`#project_container_${id}`);
-  let tabs = document.querySelector('#tabs');
+const deleteProject = (e) => {
+  const id = e.target.dataset.projectId;
+  const wrapper = document.querySelector(`#project_container_${id}`);
+  const tabs = document.querySelector('#tabs');
   tabs.removeChild(wrapper);
   // remove from project list
-  deleteFromProjectList(projectsList,id);
-  console.log(`after delete ${projectsList}`);
+  deleteFromProjectList(projectsList, id);
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
-  let tasksWrapper = document.querySelector(`#tasks_container`);
-  //Display default tab when the actual shown project is removed
-  let actProjectShow = document.querySelector(`#proj_${id}`);
+  const tasksWrapper = document.querySelector('#tasks_container');
+  // Display default tab when the actual shown project is removed
+  const actProjectShow = document.querySelector(`#proj_${id}`);
   tasksWrapper.removeChild(actProjectShow);
-  let shownProj = document.querySelector(`.shown`);
+  const shownProj = document.querySelector('.shown');
   if (shownProj === null && projectsList.length > 0) {
-    let defaultShownTab = document.querySelector(`#proj_${projectsList[0].id}`);
+    const defaultShownTab = document.querySelector(`#proj_${projectsList[0].id}`);
     defaultShownTab.classList.add('shown');
   }
-
-}
+};
 
 const editProject = (e) => {
-  let id = e.target.dataset.projectId;
+  const id = e.target.dataset.projectId;
   const spanShow = document.querySelector(`#project_show_mode_${id}`);
   spanShow.classList.toggle('hide');
   const spanEdit = document.querySelector(`#project_edit_mode_${id}`);
   spanEdit.classList.toggle('hide');
-}
+};
 
 const cancelProject = (e) => {
-  let id = e.target.dataset.projectId;
+  const id = e.target.dataset.projectId;
   const spanShow = document.querySelector(`#project_show_mode_${id}`);
   spanShow.classList.toggle('hide');
   const spanEdit = document.querySelector(`#project_edit_mode_${id}`);
@@ -83,10 +85,10 @@ const cancelProject = (e) => {
   const input = document.querySelector(`#edit_project_title_${id}`);
   const btnTxt = document.querySelector(`#show_project_title_${id}`);
   input.value = btnTxt.textContent;
-}
+};
 
 const submitEditProject = (e) => {
-  let id = e.target.dataset.projectId;
+  const id = e.target.dataset.projectId;
   const input = document.querySelector(`#edit_project_title_${id}`);
   editProjectTitle(projectsList, id, input.value);
   const btnTxt = document.querySelector(`#show_project_title_${id}`);
@@ -95,114 +97,112 @@ const submitEditProject = (e) => {
   spanShow.classList.toggle('hide');
   const spanEdit = document.querySelector(`#project_edit_mode_${id}`);
   spanEdit.classList.toggle('hide');
-  let defaultShownTab = document.querySelector(`#header_title_${id}`);
+  const defaultShownTab = document.querySelector(`#header_title_${id}`);
   defaultShownTab.textContent = input.value;
-}
+};
 
 const cancelAddTask = (e) => {
-  let id = e.target.dataset.projectId;
-  let titleInput = document.querySelector(`#task_title_${id}`);
+  const id = e.target.dataset.projectId;
+  const titleInput = document.querySelector(`#task_title_${id}`);
   titleInput.value = '';
-  let descriptionInput = document.querySelector(`#task_description_${id}`);
+  const descriptionInput = document.querySelector(`#task_description_${id}`);
   descriptionInput.value = '';
-  let priorityInput = document.querySelector(`#task_priority_${id}`);
+  const priorityInput = document.querySelector(`#task_priority_${id}`);
   priorityInput.value = 'low';
-  let form = document.querySelector(`#add_task_form_${id}`);
+  const form = document.querySelector(`#add_task_form_${id}`);
   form.classList.toggle('hide');
-}
+};
 
 const addTask = (e) => {
-  let id = e.target.dataset.projectId;
-  let projectIndx = findProject(projectsList, id);
-  let project = projectsList[projectIndx];
+  const id = e.target.dataset.projectId;
+  const projectIndx = findProject(projectsList, id);
+  const project = projectsList[projectIndx];
 
-  let titleInput = document.querySelector(`#task_title_${id}`);
-  let title = titleInput.value;
-  let descriptionInput = document.querySelector(`#task_description_${id}`);
-  let description =  descriptionInput.value;
-  let priorityInput = document.querySelector(`#task_priority_${id}`);
-  let priority = priorityInput.value;
+  const titleInput = document.querySelector(`#task_title_${id}`);
+  const title = titleInput.value;
+  const descriptionInput = document.querySelector(`#task_description_${id}`);
+  const description = descriptionInput.value;
+  const priorityInput = document.querySelector(`#task_priority_${id}`);
+  const priority = priorityInput.value;
 
-  let dateInput = document.querySelector(`#task_date_${id}`);
-  let date = dateInput.value;
+  const dateInput = document.querySelector(`#task_date_${id}`);
+  const date = dateInput.value;
 
-  const task = new Task(title , description, date, priority, id, project.taskCounter);
+  const task = new Task(title, description, date, priority, id, project.taskCounter);
   addTaskToProject(projectsList, id, task);
-  // console.log(projectsList);
-  let taskWrapper = document.querySelector(`#tasks_wrapper_${id}`);
-  taskWrapper.append( displayTask(task) );
+  const taskWrapper = document.querySelector(`#tasks_wrapper_${id}`);
+  taskWrapper.append(displayTask(task));
 
-  let form = document.querySelector(`#add_task_form_${id}`);
+  const form = document.querySelector(`#add_task_form_${id}`);
   form.classList.toggle('hide');
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
-}
+};
 
-const deleteTask = (e)=>{
-  let taskId = e.target.dataset.TaskId;
-  let projId = e.target.dataset.TaskProjId;
+const deleteTask = (e) => {
+  const taskId = e.target.dataset.TaskId;
+  const projId = e.target.dataset.TaskProjId;
 
-  let TaskCard = document.querySelector(`#task_card_${projId}_${taskId}`);
-  let tasksWrapper = document.querySelector(`#tasks_wrapper_${projId}`);
+  const TaskCard = document.querySelector(`#task_card_${projId}_${taskId}`);
+  const tasksWrapper = document.querySelector(`#tasks_wrapper_${projId}`);
   tasksWrapper.removeChild(TaskCard);
 
 
   // remove from project list
-  let projectIndx = findProject(projectsList, projId);
-  let project = projectsList[projectIndx];
+  const projectIndx = findProject(projectsList, projId);
+  const project = projectsList[projectIndx];
   project.removeTask(taskId);
 
-  console.log(`after delete ${project.tasks}`);
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
-}
+};
 
 const cancelEditTask = (e) => {
-  let taskId = e.target.dataset.TaskId;
-  let projId = e.target.dataset.TaskProjId;
+  const taskId = e.target.dataset.TaskId;
+  const projId = e.target.dataset.TaskProjId;
 
-  let projectIndx = findProject(projectsList, projId);
-  let project = projectsList[projectIndx];
-  let taskIndex = findProject(project.tasks, taskId);
-  let task = project.tasks[taskIndex];
+  const projectIndx = findProject(projectsList, projId);
+  const project = projectsList[projectIndx];
+  const taskIndex = findProject(project.tasks, taskId);
+  const task = project.tasks[taskIndex];
 
-  let titleInput = document.querySelector(`#edit_task_title_${projId}_${taskId}`);
+  const titleInput = document.querySelector(`#edit_task_title_${projId}_${taskId}`);
   titleInput.value = task.title;
-  let descriptionInput = document.querySelector(`#edit_task_description_${projId}_${taskId}`);
+  const descriptionInput = document.querySelector(`#edit_task_description_${projId}_${taskId}`);
   descriptionInput.value = task.description;
-  let priorityInput = document.querySelector(`#edit_task_priority_${projId}_${taskId}`);
+  const priorityInput = document.querySelector(`#edit_task_priority_${projId}_${taskId}`);
   priorityInput.value = task.priority;
-  let statusInput = document.querySelector(`#edit_task_status_${projId}_${taskId}`);
+  const statusInput = document.querySelector(`#edit_task_status_${projId}_${taskId}`);
   statusInput.value = task.status;
 
   const divShowMode = document.querySelector(`#task_show_mode_${projId}_${taskId}`);
   divShowMode.classList.toggle('hide');
   const divEditMode = document.querySelector(`#task_edit_mode_${projId}_${taskId}`);
   divEditMode.classList.toggle('hide');
-}
+};
 
-const submitEditTask = (e)=>{
-  let taskId = e.target.dataset.TaskId;
-  let projId = e.target.dataset.TaskProjId;
+const submitEditTask = (e) => {
+  const taskId = e.target.dataset.TaskId;
+  const projId = e.target.dataset.TaskProjId;
 
-  let projectIndx = findProject(projectsList, projId);
-  let project = projectsList[projectIndx];
-  let taskIndex = findProject(project.tasks, taskId);
-  let task = project.tasks[taskIndex];
+  const projectIndx = findProject(projectsList, projId);
+  const project = projectsList[projectIndx];
+  const taskIndex = findProject(project.tasks, taskId);
+  const task = project.tasks[taskIndex];
   const priorityLast = task.priority;
   const statusLast = task.status;
 
-  let titleInput = document.querySelector(`#edit_task_title_${projId}_${taskId}`);
+  const titleInput = document.querySelector(`#edit_task_title_${projId}_${taskId}`);
   task.title = titleInput.value;
-  let descriptionInput = document.querySelector(`#edit_task_description_${projId}_${taskId}`);
+  const descriptionInput = document.querySelector(`#edit_task_description_${projId}_${taskId}`);
   task.description = descriptionInput.value;
-  let priorityInput = document.querySelector(`#edit_task_priority_${projId}_${taskId}`);
+  const priorityInput = document.querySelector(`#edit_task_priority_${projId}_${taskId}`);
   task.priority = priorityInput.value;
 
-  let dateInput = document.querySelector(`#edit_task_date_${projId}_${taskId}`);
-  if (dateInput.value !== ""){
+  const dateInput = document.querySelector(`#edit_task_date_${projId}_${taskId}`);
+  if (dateInput.value !== '') {
     task.dueDate = dateInput.value;
   }
 
-  let statusInput = document.querySelector(`#edit_task_status_${projId}_${taskId}`);
+  const statusInput = document.querySelector(`#edit_task_status_${projId}_${taskId}`);
   task.status = statusInput.value;
 
   const titleDisplay = document.querySelector(`#display_task_title_${projId}_${taskId}`);
@@ -216,7 +216,7 @@ const submitEditTask = (e)=>{
   priorityDisplay.classList.add(`priority_box_${task.priority}`);
 
   const dateDisplay = document.querySelector(`#display_task_date_${projId}_${taskId}`);
-  dateDisplay.textContent = formatDistanceToNow(task.formatedDueDate(),{addSuffix: true});
+  dateDisplay.textContent = formatDistanceToNow(task.formatedDueDate(), { addSuffix: true });
 
   const statusDisplay = document.querySelector(`#display_task_status_${projId}_${taskId}`);
   statusDisplay.textContent = task.status;
@@ -228,6 +228,9 @@ const submitEditTask = (e)=>{
   const divEditMode = document.querySelector(`#task_edit_mode_${projId}_${taskId}`);
   divEditMode.classList.toggle('hide');
   localStorage.setItem('projectsList', JSON.stringify(projectsList));
-}
+};
 
-export {openTab, addProject, cancelAddProject, deleteProject, editProject, cancelProject, submitEditProject , cancelAddTask , addTask, deleteTask, cancelEditTask, submitEditTask}
+export {
+  openTab, addProject, cancelAddProject, deleteProject, editProject, cancelProject,
+  submitEditProject, cancelAddTask, addTask, deleteTask, cancelEditTask, submitEditTask,
+};

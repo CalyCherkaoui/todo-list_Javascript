@@ -1,70 +1,71 @@
-class Task{
-  constructor(title, description, dueDate = '2020-12-24', priority, projId, id){
+/* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
+class Task {
+  constructor(title, description, dueDate = '2020-12-24', priority, projId, id) {
     this._title = title;
     this._description = description;
     this._dueDate = dueDate;
     this._priority = priority; // hight medium low
-    this._status = "To-do";// "todo"  ====> "progress" ===> "done"
+    this._status = 'To-do';// "todo"  ====> "progress" ===> "done"
     this._projId = projId;
     this._id = id;
   }
 
-  get title(){
+  get title() {
     return this._title;
   }
 
-  set title(title){
+  set title(title) {
     this._title = title;
   }
 
-  get description(){
+  get description() {
     return this._description;
   }
 
-  
-  get projId(){
+
+  get projId() {
     return this._projId;
   }
 
-  
-  get id(){
+
+  get id() {
     return this._id;
   }
 
-  set description(description){
+  set description(description) {
     this._description = description;
   }
 
-  get dueDate(){
+  get dueDate() {
     return this._dueDate;
   }
 
-  set dueDate(dueDate){
+  set dueDate(dueDate) {
     this._dueDate = dueDate;
   }
 
-  get priority(){
+  get priority() {
     return this._priority;
   }
 
-  set priority(priority){
+  set priority(priority) {
     this._priority = priority;
   }
 
-  get status(){
+  get status() {
     return this._status;
   }
 
-  set id(val){
+  set id(val) {
     this._id = val;
   }
 
-  set status(status){
+  set status(status) {
     this._status = status;
   }
 
-  formatedDueDate(){
-    let date = new Date(this._dueDate);
+  formatedDueDate() {
+    const date = new Date(this._dueDate);
     return date;
   }
 }
