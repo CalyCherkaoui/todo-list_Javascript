@@ -1,6 +1,6 @@
 import './style.css';
 import { projectsList, tasksContainer } from './variables';
-import { projectNav } from './projectNav';
+import projectNav from './projectNav';
 
 const globalContainer = document.querySelector('#container');
 

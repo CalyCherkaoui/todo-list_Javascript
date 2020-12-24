@@ -1,84 +1,6 @@
-import {
-  addProject, openTab, cancelAddProject, deleteProject,
-  editProject, cancelProject, submitEditProject,
-} from './listners';
+import { addProject, cancelAddProject, displayProject } from './listners';
 import addProjIcon from './add.png';
-import editProjectIcon from './pencil.png';
-import submitProjectIcon from './check.png';
-import cancelProjectIcon from './close.png';
-import deleteProjectIcon from './cancel.png';
-import { tasksContainer } from './variables';
-import { taskNav } from './taskNav';
 
-const displayProject = (project) => {
-  const wraper = document.createElement('div');
-  wraper.setAttribute('id', `project_container_${project.id}`);
-  wraper.classList.add('project_container');
-
-  const spanShowMode = document.createElement('span');
-  spanShowMode.setAttribute('id', `project_show_mode_${project.id}`);
-  spanShowMode.classList.add('span_project');
-
-  const spanEditMode = document.createElement('span');
-  spanEditMode.setAttribute('id', `project_edit_mode_${project.id}`);
-  spanEditMode.classList.add('span_project', 'hide');
-
-  const btn = document.createElement('button');
-  btn.setAttribute('id', `show_project_title_${project.id}`);
-  btn.dataset.projectId = project.id;
-  btn.addEventListener('click', (e) => openTab(e));
-  btn.setAttribute('class', 'tablinks');
-  btn.textContent = project.title;
-
-  const editProjectImage = new Image();
-  editProjectImage.setAttribute('src', editProjectIcon);
-  editProjectImage.setAttribute('class', 'add_proj_icon');
-  editProjectImage.dataset.projectId = project.id;
-  editProjectImage.addEventListener('click', e => editProject(e));
-
-
-  const deleteProjectImage = new Image();
-  deleteProjectImage.setAttribute('src', deleteProjectIcon);
-  deleteProjectImage.setAttribute('class', 'add_proj_icon');
-  deleteProjectImage.dataset.projectId = project.id;
-  deleteProjectImage.addEventListener('click', e => deleteProject(e));
-
-  const projectShowRightBtns = document.createElement('span');
-  projectShowRightBtns.classList.add('project_right_buttons');
-  projectShowRightBtns.append(editProjectImage, deleteProjectImage);
-  spanShowMode.append(btn, projectShowRightBtns);
-
-
-  const editProjTitleInput = document.createElement('input');
-  editProjTitleInput.setAttribute('type', 'text');
-  editProjTitleInput.setAttribute('id', `edit_project_title_${project.id}`);
-  editProjTitleInput.setAttribute('value', project.title);
-
-
-  const submitProjectImage = new Image();
-  submitProjectImage.setAttribute('src', submitProjectIcon);
-  submitProjectImage.setAttribute('class', 'add_proj_icon');
-  submitProjectImage.dataset.projectId = project.id;
-  submitProjectImage.addEventListener('click', (e) => submitEditProject(e));
-
-  const cancelProjectImage = new Image();
-  cancelProjectImage.setAttribute('src', cancelProjectIcon);
-  cancelProjectImage.setAttribute('class', 'add_proj_icon');
-  cancelProjectImage.dataset.projectId = project.id;
-  cancelProjectImage.addEventListener('click', e => cancelProject(e));
-
-  const projectEditRightBtns = document.createElement('span');
-  projectEditRightBtns.classList.add('project_right_buttons');
-  projectEditRightBtns.append(submitProjectImage, cancelProjectImage);
-
-  spanEditMode.append(editProjTitleInput, projectEditRightBtns);
-
-  wraper.append(spanShowMode, spanEditMode);
-
-  tasksContainer.append(taskNav(project));
-
-  return wraper;
-};
 
 const projectNav = (projList) => {
   const divNavWrap = document.createElement('div');
@@ -135,4 +57,4 @@ const projectNav = (projList) => {
   return divNavWrap;
 };
 
-export { projectNav, displayProject };
+export default projectNav;
