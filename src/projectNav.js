@@ -84,7 +84,7 @@ const projectNav = (projList) => {
 
   const brand = document.createElement('div');
   brand.setAttribute('class', 'logo_project');
-  brand.textContent = 'My Projects';
+  brand.textContent = 'My To-do List';
 
   const addProj = document.createElement('button');
   addProj.setAttribute('id', 'add_project');

@@ -190,18 +190,12 @@ const taskNav = (myproject) => {
   divNavWrap.setAttribute('class', 'tabcontent');
   divNavWrap.setAttribute('id', `proj_${myproject.id}`);
 
-  // const brand = document.createElement('div');
-  // brand.setAttribute('class', 'project_title');
-  // brand.textContent = myproject.title + 'the id' + myproject.id;
-
-  // project header
   const header = document.createElement('div');
   header.setAttribute('class', 'project_header');
   const headerTitle = document.createElement('h2');
   headerTitle.setAttribute('class', 'header_title');
   headerTitle.setAttribute('id', `header_title_${myproject.id}`);
   headerTitle.textContent = myproject.title;
-
 
   // add task header
   
@@ -229,15 +223,31 @@ const taskNav = (myproject) => {
   addTaskFormWrapper.classList.add('hide');
   addTaskFormWrapper.setAttribute('id', `add_task_form_${myproject.id}`);
 
+  const addTaskTitleDiv = document.createElement('div');
+  addTaskTitleDiv.classList.add('add_task_input_container');
+  const addTaskTiteLabel = document.createElement('label');
+  addTaskTiteLabel.setAttribute('for', `task_title_${myproject.id}`);
+  addTaskTiteLabel.textContent = 'Task title:';
+
   const addTaskTitleInput = document.createElement('input');
   addTaskTitleInput.setAttribute('type', 'text');
   addTaskTitleInput.setAttribute('id', `task_title_${myproject.id}`);
   addTaskTitleInput.setAttribute('placeholder', 'Type your task title here!');
 
+  addTaskTitleDiv.append(addTaskTiteLabel, addTaskTitleInput);
+
+  const addTaskDescriptionDiv = document.createElement('div');
+  addTaskDescriptionDiv.classList.add('add_task_input_container');
+  const addTaskDescriptionLabel = document.createElement('label');
+  addTaskDescriptionLabel.setAttribute('for', `task_description_${myproject.id}`);
+  addTaskDescriptionLabel.textContent = 'Task description:';
+
   const addTaskDescriptionInput = document.createElement('input');
   addTaskDescriptionInput.setAttribute('type', 'text');
   addTaskDescriptionInput.setAttribute('id', `task_description_${myproject.id}`);
   addTaskDescriptionInput.setAttribute('placeholder', 'Type a description for your task here!');
+
+  addTaskDescriptionDiv.append(addTaskDescriptionLabel, addTaskDescriptionInput);
 
   const addPrioritySpan = document.createElement('span');
   addPrioritySpan.setAttribute('class', 'add_task_select_span');
@@ -272,18 +282,21 @@ const taskNav = (myproject) => {
   const addTaskFormButtons = document.createElement('div');
   addTaskFormButtons.setAttribute('class', 'add_task_form_buttons');
   const addTaskFormCreate = document.createElement('button');
+  addTaskFormCreate.classList.add('submit_btn');
   addTaskFormCreate.dataset.projectId = myproject.id;
   addTaskFormCreate.addEventListener('click', (e) => addTask(e));
   addTaskFormCreate.textContent = 'Create Task';
 
   const addTaskFormCancel = document.createElement('button');
+  addTaskFormCancel.classList.add('cancel_btn');
   addTaskFormCancel.textContent = 'Cancel';
   addTaskFormCancel.dataset.projectId = myproject.id;
   addTaskFormCancel.addEventListener('click',  e => cancelAddTask(e));
 
   addTaskFormButtons.append(addTaskFormCreate , addTaskFormCancel);
 
-  addTaskFormWrapper.append(addTaskTitleInput, addTaskDescriptionInput, addPrioritySpan, addDateSpan, addTaskFormButtons);
+  addTaskFormWrapper.append(addTaskTitleDiv, addTaskDescriptionDiv, addPrioritySpan, addDateSpan, addTaskFormButtons);
+
   // tasks wrapper
   
   const tasksWrapper = document.createElement('div');

@@ -134,6 +134,7 @@ body {
   align-items: center;
   border-bottom: 0.5px solid #457b9d;
   padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .header_title {
@@ -156,6 +157,7 @@ body {
   justify-content: space-between;
   align-items: center;
   color: #14213d;
+  overflow: hidden;
 }
 
 .header_add_task:hover {
@@ -167,6 +169,7 @@ body {
 .header_add_task img,
 .header_add_task span {
   position: absolute;
+  z-index: -1;
 }
 
 .header_add_task span {
@@ -340,17 +343,27 @@ label {
   margin-right: 0.5rem;
 }
 
-.edit_task_form_buttons {
+.edit_task_form_buttons,
+.add_task_form_buttons {
   margin-top: 0.5rem;
   display: flex;
   width: 100%;
 }
 
-.edit_task_form_buttons button {
+.edit_task_form_buttons button,
+.add_task_form_buttons button {
   flex-grow: 1;
 }
 
 .add_task_form_wrapper {
   padding: 0.7rem;
   border: 0.5px solid #a8dadc;
+}
+
+.add_task_form_wrapper span {
+  margin-right: 0.5rem;
+}
+
+.add_task_input_container {
+  margin-bottom: 0.5rem;
 }
