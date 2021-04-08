@@ -2,7 +2,7 @@
 
 ## About
 
-In this application, we created a To-do list application that stores Projects and their respective tasks with differents properties.
+In this application, we created a To-do list application that stores Projects and their respective tasks with different properties.
 
 To build this application we used:
 
