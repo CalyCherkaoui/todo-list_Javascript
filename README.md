@@ -13,6 +13,13 @@ To build this application we used:
 - Html/css
 - Linters ( eslint and stylelint)
 
+### Main features:
+- It allows the user to create, edit or delete a task.
+-	It allows the user to create, edit or delete a project.
+-	It uses the browser's Local-storage to save user's projects and tasks.
+-	It displays color-coded progress status.
+-	It displays dates in sentence format.
+
 ## Live-Demo
 
 [My to-do list](https://calycherkaoui.github.io/todo-list_Javascript/)
